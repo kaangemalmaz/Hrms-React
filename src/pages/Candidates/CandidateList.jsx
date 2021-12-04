@@ -46,10 +46,11 @@ export default function CandidateList(){
                         ))
                     }
                 </Table.Body>
+                
 
                 <Table.Footer>
                     <Table.Row>
-                        <Table.HeaderCell colSpan='3'>
+                        <Table.HeaderCell colSpan='5'>
                             <Menu floated='right' pagination>
                                 <Menu.Item as='a' icon>
                                     <Icon name='chevron left' />
@@ -65,6 +66,7 @@ export default function CandidateList(){
                         </Table.HeaderCell>
                     </Table.Row>
                 </Table.Footer>
+                
             </Table>
         </div>
     )

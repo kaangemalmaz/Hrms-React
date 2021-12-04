@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Icon, Menu, Table, Button } from 'semantic-ui-react';
-import JobService from '../../services/jobService';
+import { Icon, Menu, Table } from 'semantic-ui-react';
+import JobPostingService from '../../services/jobPostingService';
 
 
-export default function JobList() {
-    const [jobs, setJobs] = useState([]);
+export default function JobPostingsList() {
+
+    const [jobPostings, setJobPostings] = useState([]);
 
     useEffect(() => {
         //component yüklendiğinde yapılmasını istediğin şeyi buraya yazıyorsun bu demek oluyorki sayfa yüklendiğinde aslında bu metod çalışacak.
-        let jobService = new JobService();
-        jobService.getAll().then(result => setJobs(result.data.data))
+        let jobPostingService = new JobPostingService();
+        jobPostingService.getAll().then(result => setJobPostings(result.data.data))
         //burada result.data
         //         "success": true,
         //   "message": "Ürünler Listelendi.",
@@ -17,36 +18,43 @@ export default function JobList() {
         //hepsini birden döndürür biz buradan sadece datayı alacağımız için data.data şeklinde yazdık unutma!
     })
 
-
     return (
         <div>
             <Table celled>
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell>İş Tanımı</Table.HeaderCell>
-                        <Table.HeaderCell>İşlemler</Table.HeaderCell>
+                        <Table.HeaderCell>Şehir</Table.HeaderCell>
+                        <Table.HeaderCell>İş</Table.HeaderCell>
+                        <Table.HeaderCell>İş Açıklaması</Table.HeaderCell>
+                        <Table.HeaderCell>İş Veren</Table.HeaderCell>
+                        <Table.HeaderCell>Maaş</Table.HeaderCell>
+                        <Table.HeaderCell>Açık Pozisyon</Table.HeaderCell>
+                        <Table.HeaderCell>Son Tarih</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
 
                 <Table.Body>
                     {/* js kodu yazmak için {} parantezlerini kullanıyoruz */}
                     {
-                        jobs.map((job) => (
+                        jobPostings.map((jobPosting) => (
                             //burada react tablonun her kolonu için id istemektedir. o yüzden burada key olarak verilir.
-                            <Table.Row key={job.id} >
-                                <Table.Cell>{job.title}</Table.Cell>
-                                <Table.Cell> 
-                                    <Button basic color='yellow'>Güncelle</Button>
-                                    <Button basic color='red'>Sil</Button> 
-                                </Table.Cell>
+                            <Table.Row key={jobPosting.id} >
+                                <Table.Cell>{jobPosting.city.name}</Table.Cell>
+                                <Table.Cell>{jobPosting.job.title}</Table.Cell>
+                                <Table.Cell>{jobPosting.jobDescription}</Table.Cell>
+                                <Table.Cell>{jobPosting.employer.companyName}</Table.Cell>
+                                <Table.Cell>{jobPosting.salary}</Table.Cell>
+                                <Table.Cell>{jobPosting.openPositions}</Table.Cell>
+                                <Table.Cell>{jobPosting.applicationDeadline}</Table.Cell>
                             </Table.Row>
                         ))
                     }
                 </Table.Body>
+                
 
                 <Table.Footer>
                     <Table.Row>
-                        <Table.HeaderCell colSpan='3'>
+                        <Table.HeaderCell colSpan='7'>
                             <Menu floated='right' pagination>
                                 <Menu.Item as='a' icon>
                                     <Icon name='chevron left' />
@@ -62,8 +70,8 @@ export default function JobList() {
                         </Table.HeaderCell>
                     </Table.Row>
                 </Table.Footer>
+                
             </Table>
         </div>
     )
-
 }

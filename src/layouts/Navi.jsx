@@ -8,6 +8,8 @@ export default function Navi() {
                 <Container>
                     <Menu.Item name="home" />
                     <Menu.Item name="messages" />
+                    <Menu.Item  to="/jobs" content="Jobs" />
+                    <Menu.Item  to="/home" icon="circle notched" content="Home" />
 
                     <Menu.Menu position="right">
                         <Menu.Item>

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Icon, Menu, Table, Button } from 'semantic-ui-react';
-import JobService from '../../services/jobService';
+import { Icon, Menu, Table } from 'semantic-ui-react';
+import CityService from '../../services/cityService';
 
+export default function CityList() {
 
-export default function JobList() {
-    const [jobs, setJobs] = useState([]);
+    const [cities, setCities] = useState([]);
 
     useEffect(() => {
         //component yüklendiğinde yapılmasını istediğin şeyi buraya yazıyorsun bu demek oluyorki sayfa yüklendiğinde aslında bu metod çalışacak.
-        let jobService = new JobService();
-        jobService.getAll().then(result => setJobs(result.data.data))
+        let cityService = new CityService();
+        cityService.getAll().then(result => setCities(result.data.data))
         //burada result.data
         //         "success": true,
         //   "message": "Ürünler Listelendi.",
@@ -17,36 +17,31 @@ export default function JobList() {
         //hepsini birden döndürür biz buradan sadece datayı alacağımız için data.data şeklinde yazdık unutma!
     })
 
-
     return (
         <div>
             <Table celled>
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell>İş Tanımı</Table.HeaderCell>
-                        <Table.HeaderCell>İşlemler</Table.HeaderCell>
+                        <Table.HeaderCell>Şehir</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
 
                 <Table.Body>
                     {/* js kodu yazmak için {} parantezlerini kullanıyoruz */}
                     {
-                        jobs.map((job) => (
+                        cities.map((city) => (
                             //burada react tablonun her kolonu için id istemektedir. o yüzden burada key olarak verilir.
-                            <Table.Row key={job.id} >
-                                <Table.Cell>{job.title}</Table.Cell>
-                                <Table.Cell> 
-                                    <Button basic color='yellow'>Güncelle</Button>
-                                    <Button basic color='red'>Sil</Button> 
-                                </Table.Cell>
+                            <Table.Row key={city.id} >
+                                <Table.Cell>{city.name}</Table.Cell>
                             </Table.Row>
                         ))
                     }
                 </Table.Body>
+                
 
                 <Table.Footer>
                     <Table.Row>
-                        <Table.HeaderCell colSpan='3'>
+                        <Table.HeaderCell colSpan='2'>
                             <Menu floated='right' pagination>
                                 <Menu.Item as='a' icon>
                                     <Icon name='chevron left' />
@@ -62,8 +57,8 @@ export default function JobList() {
                         </Table.HeaderCell>
                     </Table.Row>
                 </Table.Footer>
+                
             </Table>
         </div>
     )
-
 }
