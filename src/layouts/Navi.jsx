@@ -13,6 +13,7 @@ export default function Navi() {
                     <Menu.Item as={NavLink} to="/employers" name="Employers" />
                     <Menu.Item as={NavLink} to="/jobpostings" name="JobPostings" />
                     <Menu.Item as={NavLink} to="/jobs" name="Jobs" />
+                    <Menu.Item as={NavLink} to="/typeofwork" name="TypeOfWork" />
                     
                     <Menu.Menu position="right">
                         <Menu.Item>
