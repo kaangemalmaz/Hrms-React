@@ -1,37 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import JobService from '../../services/jobService';
+import TypeOfWorkTimeService from '../../services/typeOfWorkTimeService';
 import * as Yup from "yup";
 import { toast } from 'react-toastify';
 import { Form, Formik } from 'formik';
-import { Button } from 'semantic-ui-react';
 import AKGTextInput from '../../utilities/CustomFormControl/AKGTextInput';
+import { Button } from 'semantic-ui-react';
 
-export default function JobUpdate() {
+export default function TypeOfWorkTimeUpdate() {
 
-    let jobService = new JobService();
+    let typeofworktimeService = new TypeOfWorkTimeService();
     let { id } = useParams();
-    const [jobs, setJobs] = useState([]);
+    const [typeofworktimes, setTypeOfWorkTimes] = useState([]);
 
     useEffect(() => {
-        jobService.getById(id).then(result => setJobs(result.data.data))
+        typeofworktimeService.getById(id).then(result => setTypeOfWorkTimes(result.data.data))
     }, [])
 
     const initialValue = {
-        id: jobs.id,
-        title: jobs.title
+        id: typeofworktimes.id,
+        workTimeType: typeofworktimes.workTimeType
     };
 
     const schema = Yup.object({
         id: Yup.number().required("Required Field"),
-        title: Yup.string().required("Required Field."),
+        workTimeType: Yup.string().required("Required Field."),
     });
 
     const onSubmit = (values) => {
-        jobService.update(values);
-        toast.success(`${values.title} başarı ile güncellendi`)
+        typeofworktimeService.update(values);
+        toast.success(`${values.workTimeType} başarı ile güncellendi`)
     }
-
+    
     return (
         <div>
             <Formik
@@ -40,9 +40,10 @@ export default function JobUpdate() {
                     validationSchema={schema}
                     onSubmit={onSubmit}
                 >
+
                     <Form className="ui form">
                         <input type="hidden" name="id" />
-                        <AKGTextInput name="title" placeholder="title" />
+                        <AKGTextInput name="workTimeType" placeholder="workTimeType" />
                         <Button color="green" type="submit">Güncelle</Button>
                     </Form>
 

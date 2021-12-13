@@ -18,8 +18,8 @@ export default function TypeOfWorkUpdate() {
     }, [])
 
     const initialValue = {
-        id: "",
-        workType: ""
+        id: typeofworks.id,
+        workType: typeofworks.workType
     };
 
     const schema = Yup.object({
@@ -37,12 +37,13 @@ export default function TypeOfWorkUpdate() {
             <div>
                 <Formik
                     initialValues={initialValue}
+                    enableReinitialize
                     validationSchema={schema}
                     onSubmit={onSubmit}
                 >
 
                     <Form className="ui form">
-                        {/* <input type="hidden" name="id" /> */}
+                        <input type="hidden" name="id" />
                         <AKGTextInput name="workType" placeholder="workType" />
                         <Button color="green" type="submit">Güncelle</Button>
                     </Form>

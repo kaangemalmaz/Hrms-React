@@ -2,26 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, Table } from 'semantic-ui-react';
-import TypeOfWorkService from '../../services/typeOfWorkService';
+import TypeOfWorkTimeService from '../../services/typeOfWorkTimeService';
 
-export default function TypeOfWorkList() {
+export default function TypeOfWorkTimeList() {
 
-    const [typeofworks, setTypeOfWorks] = useState([]);
+    const [typeofworktimes, setTypeOfWorksTimes] = useState([]);
 
-    let typeofworkService = new TypeOfWorkService();
+    let typeofworktimeService = new TypeOfWorkTimeService();
     useEffect(() => {
-        typeofworkService.getAll().then(result => setTypeOfWorks(result.data.data))
+        typeofworktimeService.getAll().then(result => setTypeOfWorksTimes(result.data.data))
     }, [])
 
     const onSubmit = (values) => {
-        console.log(values);
-        typeofworkService.delete(values.id);
-        toast.success(`${values.workType} başarı ile silinmiştir.`)
+        typeofworktimeService.delete(values.id);
+        toast.success(`${values.workTimeType} başarı ile silinmiştir.`)
     }
 
     return (
         <div>
-            <Button basic color='yellow'><Link to={"/typeofwork/add/"}>İş yöntemi ekleyiniz.</Link></Button>
+            <Button basic color='yellow'><Link to={"/typeofworktime/add/"}>Çalışma yöntemi ekleyiniz.</Link></Button>
             <Table celled>
                 <Table.Header>
                     <Table.Row>
@@ -33,14 +32,14 @@ export default function TypeOfWorkList() {
                 <Table.Body>
                     {/* js kodu yazmak için {} parantezlerini kullanıyoruz */}
                     {
-                        typeofworks.map((typeofwork) => (
+                        typeofworktimes.map((typeofworktime) => (
                             //burada react tablonun her kolonu için id istemektedir. o yüzden burada key olarak verilir.
-                            <Table.Row key={typeofwork.id} >
+                            <Table.Row key={typeofworktime.id} >
 
-                                <Table.Cell>{typeofwork.workType}</Table.Cell>
+                                <Table.Cell>{typeofworktime.workTimeType}</Table.Cell>
                                 <Table.Cell>
-                                    <Button basic color='yellow'><Link to={"/typeofwork/update/" + typeofwork.id}>Güncelle</Link></Button>
-                                    <Button basic color='red' onClick={() => onSubmit(typeofwork)}>Sil</Button>
+                                    <Button basic color='yellow'><Link to={"/typeofworktime/update/" + typeofworktime.id}>Güncelle</Link></Button>
+                                    <Button basic color='red' onClick={() => onSubmit(typeofworktime)}>Sil</Button>
                                 </Table.Cell>
                             </Table.Row>
                         ))

@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Icon, Menu, Table, Button } from 'semantic-ui-react';
 import JobService from '../../services/jobService';
 
 
 export default function JobList() {
     const [jobs, setJobs] = useState([]);
+
+    let jobService = new JobService();
 
     useEffect(() => {
         //component yüklendiğinde yapılmasını istediğin şeyi buraya yazıyorsun bu demek oluyorki sayfa yüklendiğinde aslında bu metod çalışacak.
@@ -17,9 +21,15 @@ export default function JobList() {
         //hepsini birden döndürür biz buradan sadece datayı alacağımız için data.data şeklinde yazdık unutma!
     })
 
+    const onSubmit = (values) => {
+        jobService.delete(values.id);
+        toast.success(`${values.title} başarı ile silinmiştir.`)
+    }
+
 
     return (
         <div>
+            <Button basic color='yellow'><Link to={"/jobs/add/"}>Yeni iş ekleyiniz.</Link></Button>
             <Table celled>
                 <Table.Header>
                     <Table.Row>
@@ -35,9 +45,9 @@ export default function JobList() {
                             //burada react tablonun her kolonu için id istemektedir. o yüzden burada key olarak verilir.
                             <Table.Row key={job.id} >
                                 <Table.Cell>{job.title}</Table.Cell>
-                                <Table.Cell> 
-                                    <Button basic color='yellow'>Güncelle</Button>
-                                    <Button basic color='red'>Sil</Button> 
+                                <Table.Cell>
+                                    <Button basic color='yellow'><Link to={"/jobs/update/" + job.id}>Güncelle</Link></Button>
+                                    <Button basic color='red' onClick={() => onSubmit(job)}>Sil</Button>
                                 </Table.Cell>
                             </Table.Row>
                         ))
