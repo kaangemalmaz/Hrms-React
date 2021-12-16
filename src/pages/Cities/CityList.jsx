@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Button, Icon, Menu, Table } from 'semantic-ui-react';
+import { Button, Container, Icon, Menu, Table } from 'semantic-ui-react';
 import CityService from '../../services/cityService';
 
 export default function CityList() {
@@ -10,7 +10,7 @@ export default function CityList() {
     let cityService = new CityService();
     useEffect(() => {
         //component yüklendiğinde yapılmasını istediğin şeyi buraya yazıyorsun bu demek oluyorki sayfa yüklendiğinde aslında bu metod çalışacak.
-        
+
         cityService.getAll().then(result => setCities(result.data.data))
         //burada result.data
         //         "success": true,
@@ -50,7 +50,7 @@ export default function CityList() {
                         ))
                     }
                 </Table.Body>
-                
+
 
                 <Table.Footer>
                     <Table.Row>
@@ -70,7 +70,7 @@ export default function CityList() {
                         </Table.HeaderCell>
                     </Table.Row>
                 </Table.Footer>
-                
+
             </Table>
         </div>
     )

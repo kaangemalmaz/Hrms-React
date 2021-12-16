@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Icon, Menu, Table } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Button, Icon, Menu, Table } from 'semantic-ui-react';
 import JobPostingService from '../../services/jobPostingService';
 
 
@@ -20,6 +21,7 @@ export default function JobPostingsList() {
 
     return (
         <div>
+            <Button basic color='yellow'><Link to={"/jobpostings/add"}>İş ekleyiniz.</Link></Button>
             <Table celled>
                 <Table.Header>
                     <Table.Row>
