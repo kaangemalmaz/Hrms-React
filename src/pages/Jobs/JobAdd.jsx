@@ -12,7 +12,7 @@ export default function JobAdd() {
 
     const initialValue = { title: "" }
 
-    const schema = Yup.object ({
+    const schema = Yup.object({
         title: Yup.string().required("Field is required.")
     })
 

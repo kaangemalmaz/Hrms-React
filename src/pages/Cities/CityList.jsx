@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Button, Container, Icon, Menu, Table } from 'semantic-ui-react';
+import { Button, Icon, Menu, Table } from 'semantic-ui-react';
 import CityService from '../../services/cityService';
 
 export default function CityList() {

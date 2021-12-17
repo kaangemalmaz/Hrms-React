@@ -15,7 +15,7 @@ export default function CityUpdate() {
 
     useEffect(() => {
         cityService.getById(id).then(result => setCity(result.data.data))
-    }, [])
+    }, []);
 
     const initialValue = {
         id: city.id,
