@@ -6,6 +6,7 @@ import CandidateList from "../pages/Candidates/CandidateList";
 import CityAdd from "../pages/Cities/CityAdd";
 import CityList from "../pages/Cities/CityList";
 import CityUpdate from "../pages/Cities/CityUpdate";
+import EmployerAdd from "../pages/Employers/EmployerAdd";
 import EmployerList from "../pages/Employers/EmployerList";
 import JobPostingAdd from "../pages/JobPostings/JobPostingAdd";
 import JobPostingsList from "../pages/JobPostings/JobPostingsList";
@@ -18,6 +19,7 @@ import TypeOfWorkUpdate from "../pages/TypeOfWork/TypeOfWorkUpdate";
 import TypeOfWorkTimeAdd from "../pages/TypeOfWorkTime/TypeOfWorkTimeAdd";
 import TypeOfWorkTimeList from "../pages/TypeOfWorkTime/TypeOfWorkTimeList";
 import TypeOfWorkTimeUpdate from "../pages/TypeOfWorkTime/TypeOfWorkTimeUpdate";
+import Choises from "./Choises";
 import MainPage from "./MainPage";
 
 
@@ -26,12 +28,14 @@ export default function Dashboard() {
         <div>
             <ToastContainer position="bottom-right" />
             <Route exact path="/" component={MainPage} />
+            <Route exact path="/signedIn" component={Choises} />
             <Route exact path="/candidates" component={CandidateList} />
             <Route exact path="/candidates/add" component={CandidateAdd} />
             <Route exact path="/cities" component={CityList} />
             <Route exact path="/cities/add" component={CityAdd} />
             <Route exact path="/cities/update/:id" component={CityUpdate} />
             <Route exact path="/employers" component={EmployerList} />
+            <Route exact path="/employers/add" component={EmployerAdd} />
             <Route exact path="/jobpostings" component={JobPostingsList} />
             <Route exact path="/jobpostings/add" component={JobPostingAdd} />
             <Route exact path="/jobs" component={JobList} />

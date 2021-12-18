@@ -7,8 +7,8 @@ import EmployerService from '../../services/employerService';
 import JobService from '../../services/jobService';
 import TypeOfWorkService from '../../services/typeOfWorkService';
 import TypeOfWorkTimeService from '../../services/typeOfWorkTimeService';
-import { Form, Formik, useFormik } from 'formik';
-import { Button, FormSelect } from 'semantic-ui-react';
+import { Form, Formik } from 'formik';
+import { Button } from 'semantic-ui-react';
 import AKGTextInput from '../../utilities/CustomFormControl/AKGTextInput';
 import AKGDropdown from '../../utilities/CustomFormControl/AKGDropdown';
 
@@ -98,94 +98,97 @@ export default function JobPostingAdd() {
     })
 
     const onSubmit = (values) => {
-        jobPostingService.add(values);
-        toast.success(`${values.job.name} başarı ile eklendi`)
+        let addJobPost = {
+            applicationDeadline: values.applicationDeadline,
+            openPositions: values.openPositions,
+            releaseDate: values.releaseDate,
+            salary: values.salary,
+            salaryMax: values.salaryMax,
+            salaryMin: values.salaryMin,
+            employer: { id: values.employer },
+            city: { id: values.city },
+            job: { id: values.job },
+            typeOfWorkTime: { id: values.typeOfWorkTime },
+            typeofWork : {id:values.typeofWork},
+            jobDescription: values.jobDescription
+        }
+        console.log(addJobPost);
+        jobPostingService.add(addJobPost);
+        toast.success(`${addJobPost.job.text} başarı ile eklendi`)
     };
 
-    const formik = useFormik({
-        initialValues: initialValue,
-        validationSchema: schema,
-        onSubmit: onSubmit,
-    });
+    // const formik = useFormik({
+    //     initialValues: initialValue,
+    //     validationSchema: schema,
+    //     onSubmit: onSubmit,
+    // });
 
-    const handleChange = (fieldName, value) => {
-        formik.setFieldValue(fieldName, value);
-    };
+    // const handleChange = (fieldName, value) => {
+    //     formik.setFieldValue(fieldName, value);
+    // };
 
     return (
         <div>
-            <Formik >
+            <Formik
+                initialValues={initialValue}
+                validationSchema={schema}
+                onSubmit={onSubmit}
+            >
 
                 <Form className="ui form" >
-                    <AKGTextInput name="applicationDeadline" placeholder="applicationDeadline" 
-                    onChange={(event, data) => handleChange("applicationDeadline", data.value)}
-                    value={formik.values.applicationDeadline}
-                    />
-                    <AKGTextInput name="openPositions" placeholder="openPositions" 
-                    onChange={(event, data) => handleChange("openPositions", data.value)}
-                    value={formik.values.openPositions}
-                    />
-                    <AKGTextInput name="releaseDate" placeholder="releaseDate" 
-                    onChange={(event, data) => handleChange("releaseDate", data.value)}
-                    value={formik.values.releaseDate}
-                    />
-                    <AKGTextInput name="salary" placeholder="salary" 
-                    onChange={(event, data) => handleChange("salary", data.value)}
-                    value={formik.values.salary}
-                    />
-                    <AKGTextInput name="salaryMax" placeholder="salaryMax" 
-                    onChange={(event, data) => handleChange("salaryMax", data.value)}
-                    value={formik.values.salaryMax}
-                    />
-                    <AKGTextInput name="salaryMin" placeholder="salaryMin" 
-                    onChange={(event, data) => handleChange("salaryMin", data.value)}
-                    value={formik.values.salaryMin}
-                    />
-                    <AKGTextInput name="jobDescription" placeholder="jobDescription" 
-                    onChange={(event, data) => handleChange("jobDescription", data.value)}
-                    value={formik.values.jobDescription}
-                    />
+                    <AKGTextInput name="applicationDeadline" label="applicationDeadline" placeholder="applicationDeadline" />
+                    <AKGTextInput name="openPositions" label="openPositions" placeholder="openPositions" />
+                    <AKGTextInput name="releaseDate" label="releaseDate" placeholder="releaseDate" />
+                    <AKGTextInput name="salary" label="salary" placeholder="salary" />
+                    <AKGTextInput name="salaryMax" label="salaryMax" placeholder="salaryMax" />
+                    <AKGTextInput name="salaryMin" label="salaryMin" placeholder="salaryMin" />
+                    <AKGTextInput name="jobDescription" label="jobDescription" placeholder="jobDescription" />
+                    <AKGDropdown name="city" label="City" options={cityOptions} />
+                    <AKGDropdown name="employer" label="Employer" options={employerOptions} />
+                    <AKGDropdown name="job" label="Job" options={jobOptions} />
+                    <AKGDropdown name="typeOfWorkTime" label="TypeOfWorkTime" options={typeOfWorkTimeOptions} />
+                    <AKGDropdown name="typeofwork" label="typeofwork" options={typeofWorkOptions} />
 
-                    <FormSelect
-                        name="city" label="City" options={cityOptions}
+                    {/* <FormSelect
+                        name="city" label="City" search selection options={cityOptions}
                         // onChange={(event, city) => city.value}
                         //onChange={(event, data) => data.value}
-                        onChange={(event, data) => handleChange("city", data.value)}
-                        value={formik.values.city}
+                        // onChange={(event, data) => handleChange("city", data.value)}
+                        // value={formik.values.city}
                     //value={(event,data) => console.log(data.value)}
                     />
 
                     <FormSelect
-                        name="employer" label="Employer" options={employerOptions}
+                        name="employer" label="Employer" search selection options={employerOptions}
                         //    onChange={(event, data) => data.value}
-                        onChange={(event, data) => handleChange("employer", data.value)}
-                        value={formik.values.employer}
+                        // onChange={(event, data) => handleChange("employer", data.value)}
+                        // value={formik.values.employer}
                     // value={formik.values.employer}
                     />
 
                     <FormSelect
-                        name="job" label="Job" options={jobOptions}
+                        name="job" label="Job" search selection options={jobOptions}
                         //onChange={(event, data) => data.value}
-                        onChange={(event, data) => handleChange("job", data.value)}
-                        value={formik.values.job}
+                        // onChange={(event, data) => handleChange("job", data.value)}
+                        // value={formik.values.job}
                     // value={formik.values.job}
                     />
 
                     <FormSelect
-                        name="typeOfWorkTime" label="typeOfWorkTime" options={typeOfWorkTimeOptions}
+                        name="typeOfWorkTime" label="typeOfWorkTime" search selection options={typeOfWorkTimeOptions}
                         //    onChange={(event, data) => data.value}
-                        onChange={(event, data) => handleChange("typeOfWorkTime", data.value)}
-                        value={formik.values.typeOfWorkTime}
+                        // onChange={(event, data) => handleChange("typeOfWorkTime", data.value)}
+                        // value={formik.values.typeOfWorkTime}
                     // value={formik.values.typeOfWorkTime}
                     />
 
                     <FormSelect
-                        name="typeofwork" label="typeofwork" options={typeofWorkOptions}
+                        name="typeofwork" label="typeofwork" search selection options={typeofWorkOptions}
                         //    onChange={(event, data) => data.value}
-                        onChange={(event, data) => handleChange("typeofwork", data.value)}
-                        value={formik.values.typeofwork}
+                        //onChange={(event, data) => handleChange("typeofwork", data.value)}
+                        //value={formik.values.typeofwork}
                     // value={formik.values.typeofWork}
-                    />
+                    /> */}
 
                     <Button color="green" type="submit">Ekle</Button>
                 </Form>

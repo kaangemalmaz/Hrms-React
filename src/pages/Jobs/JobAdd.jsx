@@ -29,7 +29,7 @@ export default function JobAdd() {
                 onSubmit={onSubmit}
             >
                 <Form className="ui form">
-                    <AKGTextInput name="title" placeholder="İş İsmini giriniz." />
+                    <AKGTextInput name="title" label="title" placeholder="İş İsmini giriniz." />
                     <Button color="green" type="submit" >Ekle</Button>
                 </Form>
             </Formik>

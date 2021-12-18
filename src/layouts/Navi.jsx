@@ -18,7 +18,7 @@ export default function Navi() {
                     
                     <Menu.Menu position="right">
                         <Menu.Item>
-                            <Button primary>Sign Up</Button>
+                            <Button primary as={NavLink} to="/signedIn" name="Choise">Sign Up</Button>
                         </Menu.Item>
                     </Menu.Menu>
                 </Container>

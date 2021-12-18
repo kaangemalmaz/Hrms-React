@@ -3,8 +3,12 @@ import React from 'react'
 import AKGTextInput from '../../utilities/CustomFormControl/AKGTextInput'
 import * as Yup from "yup";
 import { Button } from 'semantic-ui-react';
+import CandidateService from '../../services/candidateService';
+import { toast } from 'react-toastify';
 
 export default function CandidateAdd() {
+
+    let candidateService = new CandidateService();
 
     const initialValues = {
         birthDay: "",
@@ -26,21 +30,27 @@ export default function CandidateAdd() {
         surname: Yup.string().required("Soyadı girilmelidir."),
     })
 
+    const onSubmit = (values) => {
+        candidateService.add(values);
+        toast.success(`${values.email} başarı ile eklendi`)
+    }
+
     return (
         <div>
             <Formik
                 initialValues={initialValues}
                 validationSchema={schema}
+                onSubmit={onSubmit}
             >
                 <Form className="ui form">
-                    <AKGTextInput name="name" placeholder="İsim seçiniz" />
-                    <AKGTextInput name="surname" placeholder="Soyadı seçiniz" />
-                    <AKGTextInput name="identityNo" placeholder="TCKN seçiniz" />
-                    <AKGTextInput name="email" placeholder="Email seçiniz" />
-                    <AKGTextInput name="birthDay" placeholder="Çalışma Tipini seçiniz" />
-                    <AKGTextInput name="password" placeholder="Şifre seçiniz" />
-                    <AKGTextInput name="repassword" placeholder="Şifre seçiniz" />
-                    
+                    <AKGTextInput name="name" label= "İsminiz" placeholder="İsim seçiniz" />
+                    <AKGTextInput name="surname" label= "Soyadınız" placeholder="Soyadı seçiniz" />
+                    <AKGTextInput name="identityNo" label= "TC Kimlik No" placeholder="TCKN seçiniz" />
+                    <AKGTextInput name="email" label= "Eposta adresi" placeholder="Email seçiniz" />
+                    <AKGTextInput name="birthDay" label= "Doğum Tarihiniz" placeholder="Çalışma Tipini seçiniz" />
+                    <AKGTextInput name="password" label= "Şifre" placeholder="Şifre seçiniz" />
+                    <AKGTextInput name="repassword" label= "Şifre tekrar" placeholder="Şifre seçiniz" />
+                    <br />
                     <Button color="green" type="submit">Ekle</Button>
                 </Form>
             </Formik>

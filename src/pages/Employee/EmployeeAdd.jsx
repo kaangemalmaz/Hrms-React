@@ -1,14 +1,13 @@
 import React from 'react'
-import EmployerService from '../../services/employerService'
+import { toast } from 'react-toastify';
+import EmployeeService from '../../services/employeeService'
 import * as Yup from "yup";
 import { Form, Formik } from 'formik';
 import AKGTextInput from '../../utilities/CustomFormControl/AKGTextInput';
 import { Button } from 'semantic-ui-react';
-import { toast } from 'react-toastify';
 
-export default function EmployerAdd() {
-
-    let employerService = new EmployerService();
+export default function EmployeeAdd() {
+    let employeeService = new EmployeeService();
 
     const initialValues = {
         companyName: "",
