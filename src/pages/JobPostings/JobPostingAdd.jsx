@@ -7,8 +7,8 @@ import EmployerService from '../../services/employerService';
 import JobService from '../../services/jobService';
 import TypeOfWorkService from '../../services/typeOfWorkService';
 import TypeOfWorkTimeService from '../../services/typeOfWorkTimeService';
-import { Form, Formik } from 'formik';
-import { Button } from 'semantic-ui-react';
+import { Form, Formik, useFormik } from 'formik';
+import { Button, Dropdown, FormInput, FormSelect } from 'semantic-ui-react';
 import AKGTextInput from '../../utilities/CustomFormControl/AKGTextInput';
 import AKGDropdown from '../../utilities/CustomFormControl/AKGDropdown';
 
@@ -36,177 +36,220 @@ export default function JobPostingAdd() {
         typeOfWorkTimeService.getAll().then((result) => setTypeOfWorkTime(result.data.data));
     }, [])
 
-    const cityOptions = cities.map((city, index) => ({
-        key: index,
+    const cityOptions = cities.map((city) => ({
+        key: city.id,
         text: city.name,
-        value: city.id
+        value: city
     }));
 
-    const employerOptions = employers.map((employer, index) => ({
-        key: index,
+    const employerOptions = employers.map((employer) => ({
+        key: employer.id,
         text: employer.companyName,
-        value: employer.id
+        value: employer
     }));
 
-    const jobOptions = jobs.map((job, index) => ({
-        key: index,
+    const jobOptions = jobs.map((job) => ({
+        key: job.id,
         text: job.title,
-        value: job.id
+        value: job
     }));
 
-    const typeOfWorkTimeOptions = typeOfWorkTimes.map((typeOfWorkTime, index) => ({
-        key: index,
+    const typeOfWorkTimeOptions = typeOfWorkTimes.map((typeOfWorkTime) => ({
+        key: typeOfWorkTime.id,
         text: typeOfWorkTime.workTimeType,
-        value: typeOfWorkTime.id
+        value: typeOfWorkTime
     }));
 
-    const typeofWorkOptions = typeOfWorks.map((typeOfWork, index) => ({
-        key: index,
+    const typeofWorkOptions = typeOfWorks.map((typeOfWork) => ({
+        key: typeOfWork.id,
         text: typeOfWork.workType,
-        value: typeOfWork.id
+        value: typeOfWork
     }));
 
-    const initialValue = {
+    const initialValues = {
         applicationDeadline: "",
         jobDescription: "",
-        openPositions: 0,
+        openPositions: 1,
         releaseDate: "",
         salary: "",
         salaryMax: "",
         salaryMin: "",
-        employer: "",
-        city: "",
-        job: "",
-        typeofWork: "",
-        typeOfWorkTime: "",
         active: false,
-    }
+        employer: employers,
+        city: cities,
+        job: jobs,
+        typeofWork: typeOfWorks,
+        typeOfWorkTime: typeOfWorkTimes,
+    };
 
     const schema = Yup.object({
         applicationDeadline: Yup.date().required("Field is required."),
-        openPositions: Yup.number().required("Field is required."),
+        openPositions: Yup.number().positive("Not a positive number").required("Field is required."),
         releaseDate: Yup.date().required("Field is required."),
         salary: Yup.string().required("Field is required."),
         salaryMax: Yup.string().required("Field is required."),
         salaryMin: Yup.string().required("Field is required."),
+        jobDescription: Yup.string().required("Field is required."),
         employer: Yup.object().required("Field is required."),
         city: Yup.object().required("Field is required."),
         job: Yup.object().required("Field is required."),
         typeOfWorkTime: Yup.object().required("Field is required."),
         typeofWork: Yup.object().required("Field is required."),
-        jobDescription: Yup.string().required("Field is required."),
-    })
+    });
 
     const onSubmit = (values) => {
-        let addJobPost = {
-            applicationDeadline: values.applicationDeadline,
-            openPositions: values.openPositions,
-            releaseDate: values.releaseDate,
-            salary: values.salary,
-            salaryMax: values.salaryMax,
-            salaryMin: values.salaryMin,
-            employer: { id: values.employer },
-            city: { id: values.city },
-            job: { id: values.job },
-            typeOfWorkTime: { id: values.typeOfWorkTime },
-            typeofWork : {id:values.typeofWork},
-            jobDescription: values.jobDescription
-        }
-        console.log(addJobPost);
-        jobPostingService.add(addJobPost);
-        toast.success(`${addJobPost.job.text} başarı ile eklendi`)
+        // let addJobPost = {
+        //     applicationDeadline: values.applicationDeadline,
+        //     openPositions: values.openPositions,
+        //     releaseDate: values.releaseDate,
+        //     salary: values.salary,
+        //     salaryMax: values.salaryMax,
+        //     salaryMin: values.salaryMin,
+        //     employer: { id: values.employer },
+        //     city: { id: values.city },
+        //     job: { id: values.job },
+        //     typeOfWorkTime: { id: values.typeOfWorkTime },
+        //     typeofWork: { id: values.typeofWork },
+        //     jobDescription: values.jobDescription
+        // }
+        console.log(values);
+        jobPostingService.add(values);
+        toast.success(`${values.job.text} başarı ile eklendi`)
     };
 
-    // const formik = useFormik({
-    //     initialValues: initialValue,
-    //     validationSchema: schema,
-    //     onSubmit: onSubmit,
-    // });
+    const formik = useFormik({
+        initialValues: initialValues,
+        validationSchema: schema,
+        onSubmit: onSubmit,
+    });
 
-    // const handleChange = (fieldName, value) => {
-    //     formik.setFieldValue(fieldName, value);
-    // };
+    const handleChange = (fieldName, value) => {
+        formik.setFieldValue(fieldName, value);
+    };
 
     return (
         <div>
-            <Formik
-                initialValues={initialValue}
-                validationSchema={schema}
-                onSubmit={onSubmit}
-            >
+            <Formik>
+                {({ setFieldValue }) => (
+                    <Form className="ui form" onSubmit={formik.handleSubmit}>
+                        <FormInput name="applicationDeadline" label="applicationDeadline" placeholder="applicationDeadline"
+                            onChange={(event, data) => handleChange("applicationDeadline", data.value)}
+                            value={formik.values.applicationDeadline}
+                        />
+                        <FormInput name="openPositions" label="openPositions" placeholder="openPositions"
+                            onChange={(event, data) => handleChange("openPositions", data.value)}
+                            value={formik.values.openPositions}
+                        />
+                        <FormInput name="releaseDate" label="releaseDate" placeholder="releaseDate"
+                            onChange={(event, data) => handleChange("releaseDate", data.value)}
+                            value={formik.values.releaseDate}
+                        />
+                        <FormInput name="salary" label="salary" placeholder="salary"
+                            onChange={(event, data) => handleChange("salary", data.value)}
+                            value={formik.values.salary}
+                        />
+                        <FormInput name="salaryMax" label="salaryMax" placeholder="salaryMax"
+                            onChange={(event, data) => handleChange("salaryMax", data.value)}
+                            value={formik.values.salaryMax}
+                        />
+                        <FormInput name="salaryMin" label="salaryMin" placeholder="salaryMin"
+                            onChange={(event, data) => handleChange("salaryMin", data.value)}
+                            value={formik.values.salaryMin}
+                        />
+                        <FormInput name="jobDescription" label="jobDescription" placeholder="jobDescription"
+                            onChange={(event, data) => handleChange("jobDescription", data.value)}
+                            value={formik.values.jobDescription}
+                        />
+                        {/* <AKGDropdown  name="city" label="City" options={cityOptions} />
+                    <AKGDropdown  name="employer" label="Employer" options={employerOptions} />
+                    <AKGDropdown  name="job" label="Job" options={jobOptions} />
+                    <AKGDropdown  name="typeOfWorkTime" label="TypeOfWorkTime" options={typeOfWorkTimeOptions} />
+                    <AKGDropdown  name="typeofwork" label="typeofwork" options={typeofWorkOptions} /> */}
 
-                <Form className="ui form" >
-                    <AKGTextInput name="applicationDeadline" label="applicationDeadline" placeholder="applicationDeadline" />
-                    <AKGTextInput name="openPositions" label="openPositions" placeholder="openPositions" />
-                    <AKGTextInput name="releaseDate" label="releaseDate" placeholder="releaseDate" />
-                    <AKGTextInput name="salary" label="salary" placeholder="salary" />
-                    <AKGTextInput name="salaryMax" label="salaryMax" placeholder="salaryMax" />
-                    <AKGTextInput name="salaryMin" label="salaryMin" placeholder="salaryMin" />
-                    <AKGTextInput name="jobDescription" label="jobDescription" placeholder="jobDescription" />
-                    <AKGDropdown name="city" label="City" options={cityOptions} />
-                    <AKGDropdown name="employer" label="Employer" options={employerOptions} />
-                    <AKGDropdown name="job" label="Job" options={jobOptions} />
-                    <AKGDropdown name="typeOfWorkTime" label="TypeOfWorkTime" options={typeOfWorkTimeOptions} />
-                    <AKGDropdown name="typeofwork" label="typeofwork" options={typeofWorkOptions} />
+                        <AKGDropdown
+                            onChange={(fieldName, data) =>
+                                setFieldValue("city.id", data.value)
+                            }
+                            name="city.id"
+                            placeholder="Çalışma Türü Seçiniz"
+                            options={cityOptions}
+                        />
 
-                    {/* <FormSelect
+                        <AKGDropdown
+                            onChange={(fieldName, data) =>
+                                setFieldValue("employer.id", data.value)
+                            }
+                            name="employer.id"
+                            placeholder="Çalışma Türü Seçiniz"
+                            options={employerOptions}
+                        />
+
+                        <AKGDropdown
+                            onChange={(fieldName, data) =>
+                                setFieldValue("job.id", data.value)
+                            }
+                            name="job.id"
+                            placeholder="Çalışma Türü Seçiniz"
+                            options={jobOptions}
+                        />
+
+                        <AKGDropdown
+                            onChange={(fieldName, data) =>
+                                setFieldValue("typeOfWorkTime.id", data.value)
+                            }
+                            name="typeOfWorkTime.id"
+                            placeholder="Çalışma Türü Seçiniz"
+                            options={typeOfWorkTimeOptions}
+                        />
+
+                        <AKGDropdown
+                            onChange={(fieldName, data) =>
+                                setFieldValue("typeofwork.id", data.value)
+                            }
+                            name="typeofwork.id"
+                            placeholder="Çalışma Türü Seçiniz"
+                            options={typeofWorkOptions}
+                        />
+
+                        {/* <FormSelect
                         name="city" label="City" search selection options={cityOptions}
-                        // onChange={(event, city) => city.value}
-                        //onChange={(event, data) => data.value}
-                        // onChange={(event, data) => handleChange("city", data.value)}
-                        // value={formik.values.city}
-                    //value={(event,data) => console.log(data.value)}
+                        onChange={(event, data) => handleChange("city", data.value)}
+                        value={formik.values.city || []}
+                        multiple
                     />
 
                     <FormSelect
                         name="employer" label="Employer" search selection options={employerOptions}
-                        //    onChange={(event, data) => data.value}
-                        // onChange={(event, data) => handleChange("employer", data.value)}
-                        // value={formik.values.employer}
-                    // value={formik.values.employer}
+                        onChange={(event, data) => handleChange("employer", data.value)}
+                        value={formik.values.employer || []}
+                        multiple
                     />
 
                     <FormSelect
                         name="job" label="Job" search selection options={jobOptions}
-                        //onChange={(event, data) => data.value}
-                        // onChange={(event, data) => handleChange("job", data.value)}
-                        // value={formik.values.job}
-                    // value={formik.values.job}
+                        onChange={(event, data) => handleChange("job", data.value)}
+                        value={formik.values.job || []}
+                        multiple
                     />
 
                     <FormSelect
                         name="typeOfWorkTime" label="typeOfWorkTime" search selection options={typeOfWorkTimeOptions}
-                        //    onChange={(event, data) => data.value}
-                        // onChange={(event, data) => handleChange("typeOfWorkTime", data.value)}
-                        // value={formik.values.typeOfWorkTime}
-                    // value={formik.values.typeOfWorkTime}
+                        onChange={(event, data) => handleChange("typeOfWorkTime", data.value)}
+                        value={formik.values.typeOfWorkTime || []}
+                        multiple
                     />
 
                     <FormSelect
                         name="typeofwork" label="typeofwork" search selection options={typeofWorkOptions}
-                        //    onChange={(event, data) => data.value}
-                        //onChange={(event, data) => handleChange("typeofwork", data.value)}
-                        //value={formik.values.typeofwork}
-                    // value={formik.values.typeofWork}
+                        onChange={(event, data) => handleChange("typeofwork", data.value)}
+                        value={formik.values.typeofwork || []}
+                        multiple
                     /> */}
 
-                    <Button color="green" type="submit">Ekle</Button>
-                </Form>
+                        <Button color="green" type="submit">Ekle</Button>
+                    </Form>
+                )}
             </Formik>
         </div>
     )
 }
-
-        // let jobPosting = {
-        //     applicationDeadline:    {applicationDeadline: values.applicationDeadline},
-        //     openPositions:          { openPositions: values.openPositions },
-        //     releaseDate:            { releaseDate: values.releaseDate },
-        //     salary:                 { salary: values.salary },
-        //     salaryMax:              { salaryMax: values.salaryMax },
-        //     salaryMin:              { salaryMin: values.salaryMin },
-        //     city:                   { city: values.city_id },
-        //     employer:               { employer: values.employer_id },
-        //     job:                    { job: values.job_id },
-        //     typeOfWorkTime:         { typeOfWorkTime: values.typeOfWorkTime_id },
-        //     typeofWork:             { typeofWork: values.typeofWork_id }
-        // };

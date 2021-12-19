@@ -10,25 +10,25 @@ export default function EmployeeAdd() {
     let employeeService = new EmployeeService();
 
     const initialValues = {
-        companyName: "",
+        name: "",
+        surname: "",
+        title: "",
         email: "",
-        firmPhone: "",
-        firmWebSite: "",
         password: "",
         repassword: "",
     }
 
     const schema = Yup.object({
-        companyName: Yup.string().required("Firma ismi zorunludur."),
-        email: Yup.string().required("Firma Email zorunludur."),
-        firmPhone: Yup.string().required("Firma Telefonu zorunludur."),
-        firmWebSite: Yup.string().required("Firma Websitesi zorunludur."),
+        name: Yup.string().required("Personel ismi zorunludur."),
+        surname: Yup.string().required("Personel soyismi zorunludur."),
+        title: Yup.string().required("Personel iş bilgisi zorunludur."),
+        email: Yup.string().required("Personel email zorunludur."),
         password: Yup.string().required("Şifre zorunludur."),
         repassword: Yup.string().required("Şifre tekrar zorunludur."),
     })
 
     const onSubmit = (values) => {
-        employerService.add(values);
+        employeeService.add(values);
         toast.success(`${values.email} başarı ile eklendi`)
     }
 
@@ -40,10 +40,10 @@ export default function EmployeeAdd() {
                 onSubmit={onSubmit}
             >
                 <Form className="ui form">
-                    <AKGTextInput name="companyName" label="Firma İsmi" placeholder="Firma isim giriniz." />
-                    <AKGTextInput name="email" label="Eposta adresi" placeholder="Firma email giriniz." />
-                    <AKGTextInput name="firmPhone" label="Firma Telefonu" placeholder="Firma telefon numarası giriniz." />
-                    <AKGTextInput name="firmWebSite" label="Firma Web Sitesi" placeholder="Firma Web Sitesi giriniz." />
+                    <AKGTextInput name="name" label="Personel ismi" placeholder="Personel ismi giriniz." />
+                    <AKGTextInput name="surname" label="Personel soyismi" placeholder="Personel soyismi giriniz." />
+                    <AKGTextInput name="title" label="Personel başlık" placeholder="Personel başlık bilgisi giriniz." />
+                    <AKGTextInput name="email" label="Personel Email" placeholder="Personel email bilgisi giriniz." />
                     <AKGTextInput name="password" label="Şifre" placeholder="Şifre giriniz." />
                     <AKGTextInput name="repassword" label="Şifre tekrar" placeholder="Şifre tekrar giriniz." />
                     <br />

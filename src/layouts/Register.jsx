@@ -1,41 +1,10 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { Advertisement, Button, Card, Grid, Icon, Image, Item } from 'semantic-ui-react'
+import { Button, Card, Grid } from 'semantic-ui-react'
 
-export default function Choises() {
-
-    const extra = (
-        <a>
-            <Icon name='user' />
-            16 Friends
-        </a>
-    )
-
-
+export default function Register() {
     return (
         <div>
-            {/* <Grid>
-                <Grid.Row>
-                    <Grid.Column width={8}>
-                        <Card
-                            image='/images/avatar/large/elliot.jpg'
-                            header='Elliot Baker'
-                            meta='Friend'
-                            description='Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat.'
-                            extra={extra}
-                        />
-                    </Grid.Column>
-                    <Grid.Column width={8}>
-                        <Card
-                            image='/images/avatar/large/elliot.jpg'
-                            header='Elliot Baker'
-                            meta='Friend'
-                            description='Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat.'
-                            extra={extra}
-                        />
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid> */}
             <Grid.Row  >
                 <Grid.Column>
                     <Card.Group centered >
@@ -70,7 +39,7 @@ export default function Choises() {
                                 <Card.Description>
                                     Personel olarak sitemizde kayıt oluşturmak için aşağıya tıklayınız.
                                     <br /><br />
-                                    <Button primary as={NavLink} to="/candidates/add" >İş veren kaydı ekle</Button>
+                                    <Button primary as={NavLink} to="/employee/add" >Personel kaydı ekle</Button>
                                 </Card.Description>
                             </Card.Content>
                         </Card>
@@ -78,14 +47,6 @@ export default function Choises() {
                     </Card.Group>
                 </Grid.Column>
             </Grid.Row>
-            <Grid stackable>
-                {/* <Grid.Column floated='right' verticalAlign='middle' width={8}>
-                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-                    </Grid.Column>
-                    <Grid.Column floated='left' width={8} verticalAlign='middle'>
-                        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-                   </Grid.Column> */}
-            </Grid>
         </div>
     )
 }
