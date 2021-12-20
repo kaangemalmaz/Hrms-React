@@ -1,12 +1,12 @@
-import { Form, Formik } from 'formik';
-import React, { useState } from 'react'
-import { toast } from 'react-toastify';
+import { Form, Formik } from 'formik'
+import React, { useEffect, useState } from 'react'
 import { Button } from 'semantic-ui-react'
+import AKGTextInput from '../../utilities/CustomFormControl/AKGTextInput'
 import * as Yup from "yup"
-import UserService from '../services/userService';
-import AKGTextInput from '../utilities/CustomFormControl/AKGTextInput';
+import { toast } from 'react-toastify'
+import UserService from '../../services/userService'
 
-export default function Login() {
+export default function CandidateLogin() {
 
     let userService = new UserService();
     const [user, setUser] = useState([]);
@@ -19,7 +19,7 @@ export default function Login() {
     })
 
     const onSubmit = (values) => {
-        userService.findByEmail(values.email).then(result => setUser(result.data.data));
+        userService.findByEmail(values.email).then(result=> setUser(result.data.data));
         if (user.email === values.email && user.password === values.password) {
             toast.success(`${values.email} başarı ile giriş yapılmıştır.`)
         }
@@ -38,10 +38,9 @@ export default function Login() {
                 <Form className='ui form'>
                     <AKGTextInput name='email' label="Email" placeholder='joe@schmoe.com' />
                     <AKGTextInput name='password' label="Password" placeholder='' />
-                    <Button color='blue' type="submit">Giriş</Button>
+                    <Button color='olive' type="submit">Giriş</Button>
                 </Form>
             </Formik>
         </div>
     )
-
 }

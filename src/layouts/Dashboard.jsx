@@ -15,6 +15,9 @@ import JobPostingsList from "../pages/JobPostings/JobPostingsList";
 import JobAdd from "../pages/Jobs/JobAdd";
 import JobList from "../pages/Jobs/JobList";
 import JobUpdate from "../pages/Jobs/JobUpdate";
+import CandidateLogin from "../pages/Login/CandidateLogin";
+import EmployeeLogin from "../pages/Login/EmployeeLogin";
+import EmployerLogin from "../pages/Login/EmployerLogin";
 import TypeOfWorkAdd from "../pages/TypeOfWork/TypeOfWorkAdd";
 import TypeOfWorkList from "../pages/TypeOfWork/TypeOfWorkList";
 import TypeOfWorkUpdate from "../pages/TypeOfWork/TypeOfWorkUpdate";
@@ -33,6 +36,9 @@ export default function Dashboard() {
             <Route exact path="/" component={MainPage} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/logIn" component={Login} />
+            <Route exact path="/candidateLogin" component={CandidateLogin} />
+            <Route exact path="/employeeLogin" component={EmployeeLogin} />
+            <Route exact path="/employerLogin" component={EmployerLogin} />
             <Route exact path="/candidates" component={CandidateList} />
             <Route exact path="/candidates/add" component={CandidateAdd} />
             <Route exact path="/cities" component={CityList} />

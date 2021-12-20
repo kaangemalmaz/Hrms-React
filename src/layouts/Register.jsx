@@ -27,7 +27,7 @@ export default function Register() {
                                 <Card.Description>
                                     Aday olarak sitemizde kayıt oluşturmak için aşağıya tıklayınız.
                                     <br /><br />
-                                    <Button primary as={NavLink} to="/candidates/add" >İş veren kaydı ekle</Button>
+                                    <Button primary as={NavLink} to="/candidates/add" >Aday kaydı ekle</Button>
                                 </Card.Description>
                             </Card.Content>
                         </Card>
