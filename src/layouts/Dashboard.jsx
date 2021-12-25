@@ -8,6 +8,7 @@ import CityList from "../pages/Cities/CityList";
 import CityUpdate from "../pages/Cities/CityUpdate";
 import EmployeeAdd from "../pages/Employee/EmployeeAdd";
 import EmployeeList from "../pages/Employee/EmployeeList";
+import EmployeeUpdate from "../pages/Employee/EmployeeUpdate";
 import EmployerAdd from "../pages/Employers/EmployerAdd";
 import EmployerList from "../pages/Employers/EmployerList";
 import JobPostingAdd from "../pages/JobPostings/JobPostingAdd";
@@ -47,6 +48,7 @@ export default function Dashboard() {
             <Route exact path="/employers" component={EmployerList} />
             <Route exact path="/employers/add" component={EmployerAdd} />
             <Route exact path="/employee/add" component={EmployeeAdd} />
+            <Route exact path="/employee/update/:id" component={EmployeeUpdate} />
             <Route exact path="/employees" component={EmployeeList} />
             <Route exact path="/jobpostings" component={JobPostingsList} />
             <Route exact path="/jobpostings/add" component={JobPostingAdd} />

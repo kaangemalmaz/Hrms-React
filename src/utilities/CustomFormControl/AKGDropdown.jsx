@@ -1,30 +1,32 @@
-import { useField } from 'formik';
+import { Field } from 'formik';
 import React from 'react'
-import { FormSelect } from 'semantic-ui-react';
 
-export default function AKGDropdown({ ...props }) {
+export default function AKGDropdown(props) {
 
-    const [field, meta] = useField(props);
+    //const [field, meta] = useField(props);
+
+    const { label, name, options, ...rest } = props;
 
     return (
-        <div>
-            <FormSelect {...field} {...props} search selection></FormSelect>
+        <div className='form-control'>
+            <label htmlFor={name}>{label}</label>
+            <Field as='select'  name={name} {...rest}>
+                {options.map(option => {
+                    return (
+                        <option key={option.key} value={option.value}>
+                            {option.text}
+                        </option>
+                    )
+                })
+                }
+            </Field>
         </div>
     )
 }
 
-{/* <FormField>
-                <label htmlFor={label}>{label}</label>
-                <Field as="select" name={name} id={name} {...rest}>
-                    {
-                        options.map(option => {
-                            return (
-                                <option key={option.key} value={option.value}>
-                                    {option.text}
-                                </option>
-                                
-                            )
-                        })
-                    }
-                </Field>
-            </FormField> */}
+
+
+
+        //     <div>
+        //     <FormSelect {...field} {...props} search selection></FormSelect>
+        // </div>

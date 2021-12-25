@@ -8,6 +8,9 @@ export default function AKGTextInput({ ...props }) {
 
     const { name, label, ...rest } = props;
 
+    console.log(field.value);
+    console.log(meta);
+
     return (
         <div>
             <FormField error={meta.touched && !!meta.error}>
