@@ -6,6 +6,7 @@ import CandidateList from "../pages/Candidates/CandidateList";
 import CityAdd from "../pages/Cities/CityAdd";
 import CityList from "../pages/Cities/CityList";
 import CityUpdate from "../pages/Cities/CityUpdate";
+import ConfirmJobPosting from "../pages/Employee/ConfirmJobPosting";
 import EmployeeAdd from "../pages/Employee/EmployeeAdd";
 import EmployeeList from "../pages/Employee/EmployeeList";
 import EmployeeUpdate from "../pages/Employee/EmployeeUpdate";
@@ -38,7 +39,7 @@ export default function Dashboard() {
             <Route exact path="/register" component={Register} />
             <Route exact path="/logIn" component={Login} />
             <Route exact path="/candidateLogin" component={CandidateLogin} />
-            <Route exact path="/employeeLogin" component={EmployeeLogin} />
+            <Route exact path="/employeeLogin/:id" component={EmployeeLogin} />
             <Route exact path="/employerLogin" component={EmployerLogin} />
             <Route exact path="/candidates" component={CandidateList} />
             <Route exact path="/candidates/add" component={CandidateAdd} />
@@ -50,6 +51,7 @@ export default function Dashboard() {
             <Route exact path="/employee/add" component={EmployeeAdd} />
             <Route exact path="/employee/update/:id" component={EmployeeUpdate} />
             <Route exact path="/employees" component={EmployeeList} />
+            <Route exact path="/employee/confirmJobPosting/:id" component={ConfirmJobPosting} />
             <Route exact path="/jobpostings" component={JobPostingsList} />
             <Route exact path="/jobpostings/add" component={JobPostingAdd} />
             <Route exact path="/jobs" component={JobList} />
