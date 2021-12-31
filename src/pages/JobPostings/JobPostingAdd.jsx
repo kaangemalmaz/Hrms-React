@@ -7,9 +7,10 @@ import EmployerService from '../../services/employerService';
 import JobService from '../../services/jobService';
 import TypeOfWorkService from '../../services/typeOfWorkService';
 import TypeOfWorkTimeService from '../../services/typeOfWorkTimeService';
-import { Field, Formik, useFormik } from 'formik';
-import { Form, Button, Dropdown, Select } from 'semantic-ui-react';
-import AKGDropdown from '../../utilities/CustomFormControl/AKGDropdown';
+import { Form, Formik } from 'formik';
+import { Button } from 'semantic-ui-react';
+import AKGTextInput from '../../utilities/CustomFormControl/AKGTextInput';
+import AKGDropdown2 from '../../utilities/CustomFormControl/AKGDropdown2';
 
 
 export default function JobPostingAdd() {
@@ -43,11 +44,11 @@ export default function JobPostingAdd() {
         salaryMax: Yup.string().required("Field is required."),
         salaryMin: Yup.string().required("Field is required."),
         jobDescription: Yup.string().required("Field is required."),
-        employerId: Yup.object().required("Field is required."),
-        cityId: Yup.object().required("Field is required."),
-        jobId: Yup.object().required("Field is required."),
-        typeOfWorkTimeId: Yup.object().required("Field is required."),
-        typeofWorkId: Yup.object().required("Field is required."),
+        employerId: Yup.number().required("Field is required."),
+        cityId: Yup.number().required("Field is required."),
+        jobId: Yup.number().required("Field is required."),
+        typeOfWorkTimeId: Yup.number().required("Field is required."),
+        typeofWorkId: Yup.number().required("Field is required."),
     });
 
     const initialValues = {
@@ -67,30 +68,24 @@ export default function JobPostingAdd() {
     };
 
     const onSubmit = (values) => {
-        // let addJobPost = {
-        //     applicationDeadline: values.applicationDeadline,
-        //     openPositions: values.openPositions,
-        //     releaseDate: values.releaseDate,
-        //     salary: values.salary,
-        //     salaryMax: values.salaryMax,
-        //     salaryMin: values.salaryMin,
-        //     employer: { id: values.employer },
-        //     city: { id: values.city },
-        //     job: { id: values.job },
-        //     typeOfWorkTime: { id: values.typeOfWorkTime },
-        //     typeofWork: { id: values.typeofWork },
-        //     jobDescription: values.jobDescription
-        // }
-        console.log(values);
-        jobPostingService.add(values);
-        toast.success(`${values.job.text} başarı ile eklendi`)
+        let addJobPost = {
+            applicationDeadline: values.applicationDeadline,
+            openPositions: values.openPositions,
+            releaseDate: values.releaseDate,
+            salary: values.salary,
+            salaryMax: values.salaryMax,
+            salaryMin: values.salaryMin,
+            employer: { id: values.employerId },
+            city: { id: values.cityId },
+            job: { id: values.jobId },
+            typeOfWorkTime: { id: values.typeOfWorkTimeId },
+            typeofWork: { id: values.typeofWorkId },
+            jobDescription: values.jobDescription
+        }
+        //debugger;
+        jobPostingService.add(addJobPost);
+        toast.success(`${values.jobDescription} başarı ile eklendi`)
     };
-
-    const formik = useFormik({
-        initialValues: initialValues,
-        validationSchema: schema,
-        onSubmit: onSubmit
-    });
 
     const cityOptions = cities.map((city, index) => ({
         key: index,
@@ -124,48 +119,45 @@ export default function JobPostingAdd() {
 
     return (
         <div>
-            <Formik>
-                <Form onSubmit={formik.handleSubmit} className="ui form" >
-                    <Form.Input name="applicationDeadline" label="applicationDeadline" placeholder="applicationDeadline"
-                        onChange={(event, data) => formik.setFieldValue("applicationDeadline", data.value)}
-                        value={formik.values.applicationDeadline}
-                    />
+            <Formik
+                initialValues={initialValues}
+                validationSchema={schema}
+                onSubmit={onSubmit}
+            >
+                <Form className="ui form" >
+                    <AKGTextInput label = "Dead Line" name="applicationDeadline" placeholder="applicationDeadline" />
+                    <AKGTextInput label = "Open Position"  name="openPositions" placeholder="openPositions" />
+                    <AKGTextInput label = "Release Date" name="releaseDate" placeholder="releaseDate" />
+                    <AKGTextInput label = "Salary" name="salary" placeholder="salary" />
+                    <AKGTextInput label = "Max Salary" name="salaryMax" placeholder="salaryMax" />
+                    <AKGTextInput label = "Min Salary" name="salaryMin" placeholder="salaryMin" />
+                    <AKGTextInput label = "Job Description" name="jobDescription" placeholder="jobDescription" />
 
-                    <Form.Input name="openPositions" label="openPositions" placeholder="openPositions"
-                        onChange={(event, data) => formik.setFieldValue("openPositions", data.value)}
-                        value={formik.values.openPositions}
-                    />
+                    {/* <AKGTextInput name="cityId" placeholder="cityId" />
+                    <AKGTextInput name="employerId" placeholder="employerId" />
+                    <AKGTextInput name="jobId" placeholder="jobId" />
+                    <AKGTextInput name="typeOfWorkTimeId" placeholder="typeOfWorkTimeId" />
+                    <AKGTextInput name="typeofWorkId" placeholder="typeofWorkId" /> */}
 
-                    <Form.Input name="releaseDate" label="releaseDate" placeholder="releaseDate"
-                        onChange={(event, data) => formik.setFieldValue("releaseDate", data.value)}
-                        value={formik.values.releaseDate}
-                    />
 
-                    <Form.Input name="salary" label="salary" placeholder="salary"
-                        onChange={(event, data) => formik.setFieldValue("salary", data.value)}
-                        value={formik.values.salary}
-                    />
-
-                    <Form.Input name="salaryMax" label="salaryMax" placeholder="salaryMax"
-                        onChange={(event, data) => formik.setFieldValue("salaryMax", data.value)}
-                        value={formik.values.salaryMax}
-                    />
-
-                    <Form.Input name="salaryMin" label="salaryMin" placeholder="salaryMin"
-                        onChange={(event, data) => formik.setFieldValue("salaryMin", data.value)}
-                        value={formik.values.salaryMin}
-                    />
-
-                    <Form.Input name="jobDescription" label="jobDescription" placeholder="jobDescription"
-                        onChange={(event, data) => formik.setFieldValue("jobDescription", data.value)}
-                        value={formik.values.jobDescription}
-                    />
-
-                    <AKGDropdown label="City" name="cityId" options={cityOptions} />
+                    {/* <AKGDropdown label="City" name="cityId" options={cityOptions} />
                     <AKGDropdown label="Employer" name="employerId" options={employerOptions} />
                     <AKGDropdown label="Job" name="jobId" options={jobOptions} />
                     <AKGDropdown label="TypeOfWorkTime" name="typeOfWorkTimeId" options={typeOfWorkTimeOptions} />
-                    <AKGDropdown label="TypeofWork" name="typeofWorkId" options={typeofWorkOptions} />
+                    <AKGDropdown label="TypeofWork" name="typeofWorkId" options={typeofWorkOptions} /> */}
+
+                    <AKGDropdown2 label="City" name="cityId" defaultOption="Seçiniz" options={cityOptions}  />
+                    <AKGDropdown2 label="Employer" name="employerId" defaultOption="Seçiniz" options={employerOptions} />
+                    <AKGDropdown2 label="Job" name="jobId" defaultOption="Seçiniz" options={jobOptions} />
+                    <AKGDropdown2 label="TypeOfWorkTime" name="typeOfWorkTimeId" defaultOption="Seçiniz" options={typeOfWorkTimeOptions} />
+                    <AKGDropdown2 label="TypeofWork" name="typeofWorkId" defaultOption="Seçiniz" options={typeofWorkOptions} />
+
+
+                    {/* <Dropdown2 label="City" name="city" defaultOption="Seçiniz" options={cityOptions}  />
+                    <Dropdown2 label="Employer" name="employer" defaultOption="Seçiniz" options={employerOptions} />
+                    <Dropdown2 label="Job" name="job" defaultOption="Seçiniz" options={jobOptions} />
+                    <Dropdown2 label="TypeOfWorkTime" name="typeOfWorkTime" defaultOption="Seçiniz" options={typeOfWorkTimeOptions} />
+                    <Dropdown2 label="TypeofWork" name="typeofWork" defaultOption="Seçiniz" options={typeofWorkOptions} /> */}
 
                     <Button color="green" type="submit">Ekle</Button>
                 </Form>

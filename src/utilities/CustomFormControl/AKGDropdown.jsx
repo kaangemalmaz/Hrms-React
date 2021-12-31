@@ -1,32 +1,30 @@
-import { Field } from 'formik';
 import React from 'react'
 
-export default function AKGDropdown(props) {
+//export default function AKGDropdown(props) {
 
-    //const [field, meta] = useField(props);
-
-    const { label, name, options, ...rest } = props;
-
+const AKGDropdown = ({ label, name, onChange, defaultOption, value, error, options }) => {
     return (
         <div className='form-control'>
             <label htmlFor={name}>{label}</label>
-            <Field as='select'  name={name} {...rest}>
-                {options.map(option => {
+            <select name={name}
+                value={value}
+                onChange={onChange}
+                className='form-control'
+            >
+                <option value="">
+                    {defaultOption}
+                </option>
+                {options.map(option=>{
                     return (
-                        <option key={option.key} value={option.value}>
+                        <option key={option.key} value={option}>
                             {option.text}
                         </option>
-                    )
-                })
-                }
-            </Field>
+                    );
+                })};
+            </select>
+            {error && <div className='alert alert-danger'>{error}</div>}
         </div>
-    )
+    );
 }
 
-
-
-
-        //     <div>
-        //     <FormSelect {...field} {...props} search selection></FormSelect>
-        // </div>
+export default AKGDropdown;
