@@ -2,7 +2,7 @@ import React from 'react'
 import { toast } from 'react-toastify';
 import CityService from '../../services/cityService';
 import * as Yup from "yup";
-import { Form, Formik } from 'formik';
+import { Formik, Form } from 'formik';
 import AKGTextInput from '../../utilities/CustomFormControl/AKGTextInput';
 import { Button } from 'semantic-ui-react';
 
@@ -29,7 +29,7 @@ export default function CityAdd() {
                 onSubmit={onSubmit}
             >
                 <Form className="ui form">
-                    <AKGTextInput name="name" placeholder="name." />
+                    <AKGTextInput name="name" placeholder="name" />
                     <Button color="green" type="submit" >Ekle</Button>
                 </Form>
             </Formik>

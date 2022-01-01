@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import EmployerService from '../../services/employerService';
 import * as Yup from "yup";
 import { Form, Formik } from 'formik';
 import AKGTextInput from '../../utilities/CustomFormControl/AKGTextInput';
 import { Button } from 'semantic-ui-react';
+import EmployeeService from '../../services/employeeService';
 
 export default function EmployeeUpdate() {
 
     let { id } = useParams();
     const [employee, setEmployee] = useState([]);
-    let employeeService = new EmployerService();
+    let employeeService = new EmployeeService();
 
     useEffect(() => {
         employeeService.getById(id).then(result => setEmployee(result.data.data))
@@ -50,7 +50,6 @@ export default function EmployeeUpdate() {
                 onSubmit={onSubmit}
             >
                 <Form className="ui form">
-                    <input type="hidden" name="id" />
                     <AKGTextInput name="name" placeholder="name" />
                     <AKGTextInput name="surname" placeholder="surname" />
                     <AKGTextInput name="email" placeholder="email" />
