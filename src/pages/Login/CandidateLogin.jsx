@@ -1,46 +1,48 @@
 import { Form, Formik } from 'formik'
 import React, { useEffect, useState } from 'react'
-import { Button } from 'semantic-ui-react'
+import { Button, Card, Grid } from 'semantic-ui-react'
 import AKGTextInput from '../../utilities/CustomFormControl/AKGTextInput'
 import * as Yup from "yup"
 import { toast } from 'react-toastify'
 import UserService from '../../services/userService'
+import { NavLink } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 export default function CandidateLogin() {
 
-    let userService = new UserService();
-    const [user, setUser] = useState([]);
-
-    const initialValue = { email: "", password: "" }
-
-    const schema = Yup.object({
-        email: Yup.string().required("Field is required."),
-        password: Yup.string().required("Field is required."),
-    })
-
-    const onSubmit = (values) => {
-        userService.findByEmail(values.email).then(result=> setUser(result.data.data));
-        if (user.email === values.email && user.password === values.password) {
-            toast.success(`${values.email} başarı ile giriş yapılmıştır.`)
-        }
-        else {
-            toast.error(`${values.email} adresinizi veya şifrenizi kontrol ediniz.`)
-        }
-    }
+    let { id } = useParams();
 
     return (
         <div>
-            <Formik
-                initialValues={initialValue}
-                validationSchema={schema}
-                onSubmit={onSubmit}
-            >
-                <Form className='ui form'>
-                    <AKGTextInput name='email' label="Email" placeholder='joe@schmoe.com' />
-                    <AKGTextInput name='password' label="Password" placeholder='' />
-                    <Button color='olive' type="submit">Giriş</Button>
-                </Form>
-            </Formik>
+            <Grid.Row  >
+                <Grid.Column>
+                    <Card.Group centered >
+                        <Card>
+                            <Card.Content>
+                                <Card.Header>İş İlanı Görüntüle</Card.Header>
+                                <hr />
+                                <Card.Description>
+                                    İş İlanlarını görüntülemek için aşağıdaki butona tıklayabilirsiniz.
+                                    <br /><br />
+                                    <Button primary as={NavLink} to={"/jobpostings/" + id} >Onayla</Button>
+                                </Card.Description>
+                            </Card.Content>
+                        </Card>
+
+                        <Card>
+                            <Card.Content>
+                                <Card.Header>Bilgilerinizi Güncelleyin</Card.Header>
+                                <hr />
+                                <Card.Description>
+                                    Bilgilerinizi güncellemek için aşağıya tıklayınız.
+                                    <br /><br />
+                                    {/* <Button primary as={NavLink} to={"/employee/update/"+id} >Güncelle</Button> */}
+                                </Card.Description>
+                            </Card.Content>
+                        </Card>
+                    </Card.Group>
+                </Grid.Column>
+            </Grid.Row>
         </div>
     )
 }

@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Button, Icon, Menu, Table } from 'semantic-ui-react';
+import FavoriteJobPosting from '../../services/favoriteJobPosting';
 import JobPostingService from '../../services/jobPostingService';
 
 
 export default function JobPostingsList() {
-
+    let { id } = useParams();
+    let favoriteJobPosting = new FavoriteJobPosting();
     const [jobPostings, setJobPostings] = useState([]);
 
     useEffect(() => {
@@ -19,9 +23,18 @@ export default function JobPostingsList() {
         //hepsini birden döndürür biz buradan sadece datayı alacağımız için data.data şeklinde yazdık unutma!
     })
 
+    const onSubmit = (values) => {
+        let favoriteJobDto = {
+            candidate: { id: id },
+            jobPosting: { id: values.id }
+        }
+        favoriteJobPosting.add(favoriteJobDto);
+        toast.success(`${values.job.title} başarı ile favorilere eklenmiştir.`)
+    }
+
     return (
         <div>
-            <Button basic color='yellow'><Link to={"/jobpostings/add"}>İş ekleyiniz.</Link></Button>
+            {/* <Button basic color='yellow'><Link to={"/jobpostings/add"}>İş ekleyiniz.</Link></Button> */}
             <Table celled>
                 <Table.Header>
                     <Table.Row>
@@ -32,6 +45,7 @@ export default function JobPostingsList() {
                         <Table.HeaderCell>Maaş</Table.HeaderCell>
                         <Table.HeaderCell>Açık Pozisyon</Table.HeaderCell>
                         <Table.HeaderCell>Son Tarih</Table.HeaderCell>
+                        <Table.HeaderCell>#</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
 
@@ -48,11 +62,12 @@ export default function JobPostingsList() {
                                 <Table.Cell>{jobPosting.salary}</Table.Cell>
                                 <Table.Cell>{jobPosting.openPositions}</Table.Cell>
                                 <Table.Cell>{jobPosting.applicationDeadline}</Table.Cell>
+                                <Table.Cell><Button basic color='yellow' onClick={() => onSubmit(jobPosting)} >Favori Ekle</Button></Table.Cell>
                             </Table.Row>
                         ))
                     }
                 </Table.Body>
-                
+
 
                 <Table.Footer>
                     <Table.Row>
@@ -72,7 +87,7 @@ export default function JobPostingsList() {
                         </Table.HeaderCell>
                     </Table.Row>
                 </Table.Footer>
-                
+
             </Table>
         </div>
     )

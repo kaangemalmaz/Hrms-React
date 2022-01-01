@@ -9,7 +9,7 @@ export default function MainPage() {
         <div>
             <MainCrausel/>
             <Divider horizontal>Son İş ilanlarını inceleyiniz</Divider>
-            <JobPostingsList />
+            {/* <JobPostingsList /> */}
         </div>
     )
 }
