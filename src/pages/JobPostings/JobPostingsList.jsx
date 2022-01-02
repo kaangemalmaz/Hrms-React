@@ -35,6 +35,7 @@ export default function JobPostingsList() {
     return (
         <div>
             {/* <Button basic color='yellow'><Link to={"/jobpostings/add"}>İş ekleyiniz.</Link></Button> */}
+            
             <Table celled>
                 <Table.Header>
                     <Table.Row>
@@ -71,7 +72,13 @@ export default function JobPostingsList() {
 
                 <Table.Footer>
                     <Table.Row>
-                        <Table.HeaderCell colSpan='7'>
+                        <Table.HeaderCell colSpan='8'>
+                            <Menu floated='left' pagination>
+                                <Menu.Item as='a'>10</Menu.Item>
+                                <Menu.Item as='a'>20</Menu.Item>
+                                <Menu.Item as='a'>50</Menu.Item>
+                                <Menu.Item as='a'>100</Menu.Item>
+                            </Menu>
                             <Menu floated='right' pagination>
                                 <Menu.Item as='a' icon>
                                     <Icon name='chevron left' />

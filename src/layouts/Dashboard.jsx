@@ -56,6 +56,7 @@ export default function Dashboard() {
             <Route exact path="/jobpostings" component={JobPostingsList} />
             <Route exact path="/jobpostings/:id" component={JobPostingsList} />
             <Route exact path="/jobpostings/add" component={JobPostingAdd} />
+            <Route exact path="/jobpostings/add/:id" component={JobPostingAdd} />
             <Route exact path="/jobpostings/detail/:id" component={JobPostingDetail} />
             <Route exact path="/jobs" component={JobList} />
             <Route exact path="/jobs/add" component={JobAdd} />
