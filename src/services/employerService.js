@@ -12,4 +12,9 @@ export default class EmployerService {
   add(values) {
     return axios.post("http://localhost:8080/api/employers/add", values);
   }
+
+  update(values) {
+    return axios.put("http://localhost:8080/api/employers/update", values);
+  }
+
 }

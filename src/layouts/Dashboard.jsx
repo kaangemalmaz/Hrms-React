@@ -12,6 +12,7 @@ import EmployeeList from "../pages/Employee/EmployeeList";
 import EmployeeUpdate from "../pages/Employee/EmployeeUpdate";
 import EmployerAdd from "../pages/Employers/EmployerAdd";
 import EmployerList from "../pages/Employers/EmployerList";
+import EmployerUpdate from "../pages/Employers/EmployerUpdate";
 import JobPostingAdd from "../pages/JobPostings/JobPostingAdd";
 import JobPostingDetail from "../pages/JobPostings/JobPostingDetail";
 import JobPostingsList from "../pages/JobPostings/JobPostingsList";
@@ -37,33 +38,43 @@ export default function Dashboard() {
         <div>
             <ToastContainer position="bottom-right" />
             <Route exact path="/" component={MainPage} />
+
             <Route exact path="/register" component={Register} />
             <Route exact path="/logIn" component={Login} />
             <Route exact path="/employeeLogin/:id" component={EmployeeLogin} />
-            <Route exact path="/employerLogin" component={EmployerLogin} />
+            <Route exact path="/employerLogin/:id" component={EmployerLogin} />
+            <Route exact path="/candidateLogin/:id" component={CandidateLogin} />
+
             <Route exact path="/candidates" component={CandidateList} />
             <Route exact path="/candidates/add" component={CandidateAdd} />
-            <Route exact path="/candidateLogin/:id" component={CandidateLogin} />
+
             <Route exact path="/cities" component={CityList} />
             <Route exact path="/cities/add" component={CityAdd} />
             <Route exact path="/cities/update/:id" component={CityUpdate} />
+            
             <Route exact path="/employers" component={EmployerList} />
             <Route exact path="/employers/add" component={EmployerAdd} />
+            <Route exact path="/employer/update/:id" component={EmployerUpdate} />
+            
             <Route exact path="/employee/add" component={EmployeeAdd} />
             <Route exact path="/employee/update/:id" component={EmployeeUpdate} />
             <Route exact path="/employees" component={EmployeeList} />
+
             <Route exact path="/employee/confirmJobPosting/:id" component={ConfirmJobPosting} />
             <Route exact path="/jobpostings" component={JobPostingsList} />
             <Route exact path="/jobpostings/:id" component={JobPostingsList} />
             <Route exact path="/jobpostings/add" component={JobPostingAdd} />
             <Route exact path="/jobpostings/add/:id" component={JobPostingAdd} />
             <Route exact path="/jobpostings/detail/:id" component={JobPostingDetail} />
+
             <Route exact path="/jobs" component={JobList} />
             <Route exact path="/jobs/add" component={JobAdd} />
             <Route exact path="/jobs/update/:id" component={JobUpdate} />
+
             <Route exact path="/typeofwork" component={TypeOfWorkList} />
             <Route exact path="/typeofwork/add" component={TypeOfWorkAdd} />
             <Route exact path="/typeofwork/update/:id" component={TypeOfWorkUpdate} />
+
             <Route exact path="/typeofworktime" component={TypeOfWorkTimeList} />
             <Route exact path="/typeofworktime/add" component={TypeOfWorkTimeAdd} />
             <Route exact path="/typeofworktime/update/:id" component={TypeOfWorkTimeUpdate} />

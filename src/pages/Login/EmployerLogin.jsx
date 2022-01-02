@@ -30,7 +30,7 @@ export default function EmployerLogin() {
                                 <Card.Description>
                                     Bilgilerinizi güncellemek için aşağıya tıklayınız.
                                     <br /><br />
-                                    <Button primary as={NavLink} to={"/employee/update/"+id} >Güncelle</Button>
+                                    <Button primary as={NavLink} to={"/employer/update/"+id} >Güncelle</Button>
                                 </Card.Description>
                             </Card.Content>
                         </Card>
