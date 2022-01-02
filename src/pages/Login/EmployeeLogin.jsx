@@ -26,6 +26,18 @@ export default function EmployeeLogin() {
 
                         <Card>
                             <Card.Content>
+                                <Card.Header>İşVeren Bilgileri Onayla</Card.Header>
+                                <hr />
+                                <Card.Description>
+                                    İşVeren Bilgileri onaylama işlemi için aşağıya tıklayınız.
+                                    <br /><br />
+                                    <Button primary as={NavLink} to={"/employee/confirmEmployer/" + id} >Onayla</Button>
+                                </Card.Description>
+                            </Card.Content>
+                        </Card>
+
+                        <Card>
+                            <Card.Content>
                                 <Card.Header>Bilgilerinizi Güncelleyin</Card.Header>
                                 <hr />
                                 <Card.Description>

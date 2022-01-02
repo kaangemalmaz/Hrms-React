@@ -11,9 +11,12 @@ import { Form, Formik } from 'formik';
 import { Button } from 'semantic-ui-react';
 import AKGTextInput from '../../utilities/CustomFormControl/AKGTextInput';
 import AKGDropdown2 from '../../utilities/CustomFormControl/AKGDropdown2';
+import { useParams } from 'react-router-dom';
 
 
 export default function JobPostingAdd() {
+
+    let { id } = useParams();
 
     const [cities, setCities] = useState([]);
     const [employers, setEmployers] = useState([]);
@@ -44,7 +47,7 @@ export default function JobPostingAdd() {
         salaryMax: Yup.string().required("Field is required."),
         salaryMin: Yup.string().required("Field is required."),
         jobDescription: Yup.string().required("Field is required."),
-        employerId: Yup.number().required("Field is required."),
+        // employerId: Yup.number().required("Field is required."),
         cityId: Yup.number().required("Field is required."),
         jobId: Yup.number().required("Field is required."),
         typeOfWorkTimeId: Yup.number().required("Field is required."),
@@ -75,7 +78,7 @@ export default function JobPostingAdd() {
             salary: values.salary,
             salaryMax: values.salaryMax,
             salaryMin: values.salaryMin,
-            employer: { id: values.employerId },
+            employer: { id: id },
             city: { id: values.cityId },
             job: { id: values.jobId },
             typeOfWorkTime: { id: values.typeOfWorkTimeId },
@@ -147,7 +150,7 @@ export default function JobPostingAdd() {
                     <AKGDropdown label="TypeofWork" name="typeofWorkId" options={typeofWorkOptions} /> */}
 
                     <AKGDropdown2 label="City" name="cityId" defaultOption="Seçiniz" options={cityOptions}  />
-                    <AKGDropdown2 label="Employer" name="employerId" defaultOption="Seçiniz" options={employerOptions} />
+                    {/* <AKGDropdown2 label="Employer" name="employerId" defaultOption="Seçiniz" options={employerOptions} /> */}
                     <AKGDropdown2 label="Job" name="jobId" defaultOption="Seçiniz" options={jobOptions} />
                     <AKGDropdown2 label="TypeOfWorkTime" name="typeOfWorkTimeId" defaultOption="Seçiniz" options={typeOfWorkTimeOptions} />
                     <AKGDropdown2 label="TypeofWork" name="typeofWorkId" defaultOption="Seçiniz" options={typeofWorkOptions} />

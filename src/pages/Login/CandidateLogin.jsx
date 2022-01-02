@@ -31,6 +31,18 @@ export default function CandidateLogin() {
 
                         <Card>
                             <Card.Content>
+                                <Card.Header>CV Görüntüle</Card.Header>
+                                <hr />
+                                <Card.Description>
+                                    CV görüntülemek için aşağıdaki butona tıklayabilirsiniz.
+                                    <br /><br />
+                                    <Button primary as={NavLink} to={"/jobpostings/" + id} >Onayla</Button>
+                                </Card.Description>
+                            </Card.Content>
+                        </Card>
+
+                        <Card>
+                            <Card.Content>
                                 <Card.Header>Bilgilerinizi Güncelleyin</Card.Header>
                                 <hr />
                                 <Card.Description>
