@@ -6,12 +6,16 @@ import { toast } from 'react-toastify';
 import { Form, Formik } from 'formik';
 import AKGTextInput from '../../utilities/CustomFormControl/AKGTextInput';
 import { Button } from 'semantic-ui-react';
+import EmployerUpdateService from '../../services/employerUpdateService';
+import EmployerConfirmationService from '../../services/employerConfirmationService';
 
 export default function EmployerUpdate() {
 
     let { id } = useParams();
     const [employer, setEmployer] = useState([]);
     let employerService = new EmployerService();
+    let employerUpdateService = new EmployerUpdateService();
+    let employerConfirmationService = new EmployerConfirmationService();
 
     useEffect(() => {
         employerService.getById(id).then(result => setEmployer(result.data.data))
@@ -38,8 +42,21 @@ export default function EmployerUpdate() {
     });
 
     const onSubmit = (values) => {
-        console.log(values);
-        employerService.update(values);
+        let employerUpdateDto = {
+            employer: { id: id },
+            companyName: values.companyName,
+            email: values.email,
+            firmPhone: values.firmPhone,
+            firmWebSite: values.firmWebSite,
+            password: values.password,
+            repassword: values.repassword,
+        }
+        employerUpdateService.add(employerUpdateDto);
+        let employerConfirmationDto = {
+            is_confirmed : false,
+            employer: { id: id },
+        }
+        employerConfirmationService.add(employerConfirmationDto);
         toast.success(`${values.companyName} başarı ile güncellendi`)
     }
 
@@ -61,7 +78,6 @@ export default function EmployerUpdate() {
                     <AKGTextInput label="repassword" name="repassword" placeholder="repassword" />
                     <Button color="green" type="submit">Güncelle</Button>
                 </Form>
-
             </Formik>
         </div>
     )

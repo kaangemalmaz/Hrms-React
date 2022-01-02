@@ -31,7 +31,7 @@ export default function EmployeeLogin() {
                                 <Card.Description>
                                     İşVeren Bilgileri onaylama işlemi için aşağıya tıklayınız.
                                     <br /><br />
-                                    <Button primary as={NavLink} to={"/employee/confirmEmployer/" + id} >Onayla</Button>
+                                    <Button primary as={NavLink} to={"/employee/ConfirmEmployerUpdate/" + id} >Onayla</Button>
                                 </Card.Description>
                             </Card.Content>
                         </Card>
