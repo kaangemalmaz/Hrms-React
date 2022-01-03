@@ -4,27 +4,65 @@ import { Button, Table } from 'semantic-ui-react';
 import EmployerUpdateService from '../../services/employerUpdateService';
 import EmployerConfirmationService from '../../services/employerConfirmationService';
 import { toast } from 'react-toastify';
+import EmployerService from '../../services/employerService';
 
 export default function ConfirmEmployerUpdate() {
 
     let { id } = useParams();
     let employerUpdateService = new EmployerUpdateService();
     let employerConfirmationService = new EmployerConfirmationService();
+    let employerService = new EmployerService();
 
     const [employerUpdates, setEmployerUpdates] = useState([]);
+    const [employerConfirmation, setEmployerConfirmation] = useState({});
 
     useEffect(() => {
         employerUpdateService.findByactiveTrue().then(result => setEmployerUpdates(result.data.data))
     }, [])
 
     const onSubmit = (values) => {
-        let employerConfirmationDto = {
-            is_confirmed: true,
-            employee: { id: id },
-            employer: { id: values.id },
+        employerConfirmationService.getByEmployerIdAndDate(values.employer.id).then(result => setEmployerConfirmation(result.data));
+        console.log(employerConfirmation);
+        console.log(employerConfirmation.data);
+
+        if (employerConfirmation.success === true && employerConfirmation.data !== null) {
+            let employerConfirmationUpd = {
+                id: employerConfirmation.data.id,
+                confirmed: true,
+                employee: { id: id },
+                employer: { id: values.employer.id }
+            }
+            employerConfirmationService.update(employerConfirmationUpd);
+            
+            let employerUpdateDto = {
+                id: values.id,
+                active: false,
+                companyName: values.companyName,
+                createDate: values.createDate,
+                email: values.email,
+                employer: { id: values.employer.id },
+                firmPhone: values.firmPhone,
+                firmWebSite: values.firmWebSite,
+                password: values.password,
+                repassword: values.repassword
+            }
+            //console.log(employerUpdateDto);
+            employerUpdateService.update(employerUpdateDto);
+            
+            let employerMainUpdate = {
+                id: values.employer.id,
+                companyName: values.companyName,
+                email: values.email,
+                firmPhone: values.firmPhone,
+                firmWebSite: values.firmWebSite,
+                password: values.password,
+                repassword: values.repassword
+            }
+            employerService.update(employerMainUpdate);
+            toast.success(`${values.companyName} başarı ile güncellenmiştir.`)
+            window.location.reload();
         }
-        employerConfirmationService.update(employerConfirmationDto);
-        toast.success(`${values.companyName} başarı ile silinmiştir.`)
+
     }
 
     return (
@@ -53,7 +91,7 @@ export default function ConfirmEmployerUpdate() {
                                 <Table.Cell>{employerUpdate.firmWebSite}</Table.Cell>
                                 <Table.Cell>{employerUpdate.active ? "True" : "False"}</Table.Cell>
                                 <Table.Cell>
-                                    <Button basic color='green' onClick={()=>onSubmit(employerUpdate)}>Onayla</Button>
+                                    <Button basic color='green' onClick={() => onSubmit(employerUpdate)}>Onayla</Button>
                                 </Table.Cell>
                             </Table.Row>
                         ))

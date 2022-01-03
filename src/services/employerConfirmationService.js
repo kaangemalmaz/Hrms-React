@@ -9,6 +9,10 @@ export default class EmployerConfirmationService {
     return axios.get("http://localhost:8080/api/employerConfirmation/findByisConfirmedFalse");
   }
 
+  getByEmployerIdAndDate(employerId) {
+    return axios.get("http://localhost:8080/api/employerConfirmation/getByEmployerIdAndDate?employerId=" + employerId);
+  }
+
   getById(id) {
     return axios.get("http://localhost:8080/api/employerConfirmation/getById?id=" + id);
   }
