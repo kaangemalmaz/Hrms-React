@@ -2,10 +2,13 @@ import React from "react";
 import { Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import CandidateAdd from "../pages/Candidates/CandidateAdd";
+import CandidateCvGet from "../pages/Candidates/CandidateCvGet";
 import CandidateList from "../pages/Candidates/CandidateList";
 import CityAdd from "../pages/Cities/CityAdd";
 import CityList from "../pages/Cities/CityList";
 import CityUpdate from "../pages/Cities/CityUpdate";
+import CvSocialMediaAdd from "../pages/Cv/SocialMedia/CvSocialMediaAdd";
+import CvSocialMediaUpdate from "../pages/Cv/SocialMedia/CvSocialMediaUpdate";
 import ConfirmEmployerUpdate from "../pages/Employee/ConfirmEmployerUpdate";
 import ConfirmJobPosting from "../pages/Employee/ConfirmJobPosting";
 import EmployeeAdd from "../pages/Employee/EmployeeAdd";
@@ -49,6 +52,12 @@ export default function Dashboard() {
 
             <Route exact path="/candidates" component={CandidateList} />
             <Route exact path="/candidates/add" component={CandidateAdd} />
+            <Route exact path="/candidate/cv/:id" component={CandidateCvGet} />
+            <Route exact path="/candidate/cv/:id/addsocialmedia" component={CvSocialMediaAdd} />
+            <Route exact path="/candidate/cv/:userid/updsocialmedia/:socialid" component={CvSocialMediaUpdate} />
+
+
+
 
             <Route exact path="/cities" component={CityList} />
             <Route exact path="/cities/add" component={CityAdd} />

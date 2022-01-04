@@ -1,10 +1,5 @@
-import { Form, Formik } from 'formik'
-import React, { useEffect, useState } from 'react'
+import React, {  } from 'react'
 import { Button, Card, Grid } from 'semantic-ui-react'
-import AKGTextInput from '../../utilities/CustomFormControl/AKGTextInput'
-import * as Yup from "yup"
-import { toast } from 'react-toastify'
-import UserService from '../../services/userService'
 import { NavLink } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
@@ -36,7 +31,7 @@ export default function CandidateLogin() {
                                 <Card.Description>
                                     CV görüntülemek için aşağıdaki butona tıklayabilirsiniz.
                                     <br /><br />
-                                    <Button primary as={NavLink} to={"/jobpostings/" + id} >Onayla</Button>
+                                    <Button primary as={NavLink} to={"/candidate/cv/" + id} >Cv görüntüle</Button>
                                 </Card.Description>
                             </Card.Content>
                         </Card>

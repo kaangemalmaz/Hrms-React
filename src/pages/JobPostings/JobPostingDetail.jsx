@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { Button, Card, Grid, Icon, Image, Table } from 'semantic-ui-react';
+import { Button, Card, Grid } from 'semantic-ui-react';
 import JobPostingService from '../../services/jobPostingService';
 
 export default function JobPostingDetail() {

@@ -5,6 +5,10 @@ export default class CandidateService {
     return axios.get("http://localhost:8080/api/candidates/getAll");
   }
 
+  getAllByCandidateId(id) {
+    return axios.get("http://localhost:8080/api/candidates/getAllByCandidateId?candidateId=" + id);
+  }
+
   getById(id) {
     return axios.get("http://localhost:8080/api/candidates/getById?id=" + id);
   }
