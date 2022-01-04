@@ -34,6 +34,18 @@ export default function EmployerLogin() {
                                 </Card.Description>
                             </Card.Content>
                         </Card>
+
+                        <Card>
+                            <Card.Content>
+                                <Card.Header>Bilgilerinizi Görüntüleyin</Card.Header>
+                                <hr />
+                                <Card.Description>
+                                    Bilgilerinizi görüntülemek için aşağıya tıklayınız.
+                                    <br /><br />
+                                    <Button primary as={NavLink} to={"/employer/detail/"+id} >Görüntüle</Button>
+                                </Card.Description>
+                            </Card.Content>
+                        </Card>
                     </Card.Group>
                 </Grid.Column>
             </Grid.Row>

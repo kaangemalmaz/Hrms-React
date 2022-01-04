@@ -12,6 +12,10 @@ export default class EmployerUpdateService {
   getById(id) {
     return axios.get("http://localhost:8080/api/employerUpdate/getById?id=" + id);
   }
+  
+  getByEmployerCountActiveTrue(id) {
+    return axios.get("http://localhost:8080/api/employerUpdate/getByEmployerCountActiveTrue?employerId=" + id);
+  }
 
   add(values) {
     return axios.post("http://localhost:8080/api/employerUpdate/add", values);

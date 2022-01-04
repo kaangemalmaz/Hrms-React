@@ -12,6 +12,7 @@ import EmployeeAdd from "../pages/Employee/EmployeeAdd";
 import EmployeeList from "../pages/Employee/EmployeeList";
 import EmployeeUpdate from "../pages/Employee/EmployeeUpdate";
 import EmployerAdd from "../pages/Employers/EmployerAdd";
+import EmployerDetails from "../pages/Employers/EmployerDetails";
 import EmployerList from "../pages/Employers/EmployerList";
 import EmployerUpdate from "../pages/Employers/EmployerUpdate";
 import JobPostingAdd from "../pages/JobPostings/JobPostingAdd";
@@ -56,6 +57,7 @@ export default function Dashboard() {
             <Route exact path="/employers" component={EmployerList} />
             <Route exact path="/employers/add" component={EmployerAdd} />
             <Route exact path="/employer/update/:id" component={EmployerUpdate} />
+            <Route exact path="/employer/detail/:id" component={EmployerDetails} />
             
             <Route exact path="/employee/add" component={EmployeeAdd} />
             <Route exact path="/employee/update/:id" component={EmployeeUpdate} />
