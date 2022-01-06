@@ -11,7 +11,7 @@ import AKGDropdown2 from '../../utilities/CustomFormControl/AKGDropdown2';
 
 
 export default function JobPostingsList() {
-    
+
     //job posting için favorilere ekleme için candidate id yi almayı sağlar.
     let { id } = useParams();
 
@@ -95,7 +95,7 @@ export default function JobPostingsList() {
                         <Grid.Column width={6}><AKGDropdown2 name="cityId" defaultOption="Şehir Seçiniz" options={cityOptions} /></Grid.Column>
                         <Grid.Column width={6}><AKGDropdown2 name="typeOfWorkTimeId" defaultOption="Çalışma Zaman Tipi Seçiniz" options={typeOfWorkTimeOptions} /></Grid.Column>
                         <Grid.Column width={2}><Button color="green" type="submit" >Filtre</Button></Grid.Column>
-                        <Grid.Column width={2}><Button color='grey' type="submit" onClick={()=> handleClick()}>Temizle</Button></Grid.Column>
+                        <Grid.Column width={2}><Button color='grey' type="submit" onClick={() => handleClick()}>Temizle</Button></Grid.Column>
                     </Grid>
                 </Form>
             </Formik>

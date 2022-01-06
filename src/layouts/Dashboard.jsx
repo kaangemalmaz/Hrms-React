@@ -7,10 +7,18 @@ import CandidateList from "../pages/Candidates/CandidateList";
 import CityAdd from "../pages/Cities/CityAdd";
 import CityList from "../pages/Cities/CityList";
 import CityUpdate from "../pages/Cities/CityUpdate";
+import CvCollegeAdd from "../pages/Cv/College/CvCollegeAdd";
+import CvCollegeList from "../pages/Cv/College/CvCollegeList";
+import CvCollegeUpdate from "../pages/Cv/College/CvCollegeUpdate";
+import CvCollegeDepartmentAdd from "../pages/Cv/CollegeDepartment/CvCollegeDepartmentAdd";
+import CvCollegeDepartmentList from "../pages/Cv/CollegeDepartment/CvCollegeDepartmentList";
+import CvCollegeDepartmentUpdate from "../pages/Cv/CollegeDepartment/CvCollegeDepartmentUpdate";
 import CvCoverLetterAdd from "../pages/Cv/CoverLetter/CvCoverLetterAdd";
 import CvCoverLetterUpdate from "../pages/Cv/CoverLetter/CvCoverLetterUpdate";
 import CvExperienceAdd from "../pages/Cv/CvExperience/CvExperienceAdd";
 import CvExperienceUpdate from "../pages/Cv/CvExperience/CvExperienceUpdate";
+import CvEducationAdd from "../pages/Cv/Education/CvEducationAdd";
+import CvEducationUpdate from "../pages/Cv/Education/CvEducationUpdate";
 import CvKnowLanguageAdd from "../pages/Cv/KnowLanguage/CvKnowLanguageAdd";
 import CvKnowLanguageUpdate from "../pages/Cv/KnowLanguage/CvKnowLanguageUpdate";
 import CvLanguageAdd from "../pages/Cv/Languages/CvLanguageAdd";
@@ -69,14 +77,17 @@ export default function Dashboard() {
             <Route exact path="/candidate/cv/:id/addsocialmedia" component={CvSocialMediaAdd} />
             <Route exact path="/candidate/cv/:userid/updsocialmedia/:socialid" component={CvSocialMediaUpdate} />
             {/* socialmedia */}
+
             {/* teknology */}
             <Route exact path="/candidate/cv/:id/addteknology" component={CvTeknologyAdd} />
             <Route exact path="/candidate/cv/:userid/updteknology/:teknologyid" component={CvTeknologyUpdate} />
             {/* teknology */}
+
             {/* cover letter */}
             <Route exact path="/candidate/cv/:id/addcoverletter" component={CvCoverLetterAdd} />
             <Route exact path="/candidate/cv/:userid/updcoverletter/:coverletterid" component={CvCoverLetterUpdate} />
             {/* cover letter */}
+
             {/* CvKnowLanguage */}
             <Route exact path="/candidate/cv/:id/addcvknowlanguage" component={CvKnowLanguageAdd} />
             <Route exact path="/candidate/cv/:userid/updcvknowlanguage/:knowlanguageid" component={CvKnowLanguageUpdate} />
@@ -92,6 +103,23 @@ export default function Dashboard() {
             <Route exact path="/cvLanguages/add" component={CvLanguageAdd} />
             <Route exact path="/cvLanguages/update/:id" component={CvLanguageUpdate} />
             {/* CvLanguages */}
+
+            {/* CvCollegeDepartment */}
+            <Route exact path="/cvCollegeDepartment" component={CvCollegeDepartmentList} />
+            <Route exact path="/cvCollegeDepartment/add" component={CvCollegeDepartmentAdd} />
+            <Route exact path="/cvCollegeDepartment/update/:id" component={CvCollegeDepartmentUpdate} />
+            {/* CvCollegeDepartment */}
+
+            {/* CvCollege */}
+            <Route exact path="/cvCollege" component={CvCollegeList} />
+            <Route exact path="/cvCollege/add" component={CvCollegeAdd} />
+            <Route exact path="/cvCollege/update/:id" component={CvCollegeUpdate} />
+            {/* CvCollege */}
+
+            {/* CvEducation */}
+            <Route exact path="/candidate/cv/:id/addcveducation" component={CvEducationAdd} />
+            <Route exact path="/candidate/cv/:userid/updcveducation/:educationid" component={CvEducationUpdate} />
+            {/* CvEducation */}
 
             <Route exact path="/cities" component={CityList} />
             <Route exact path="/cities/add" component={CityAdd} />

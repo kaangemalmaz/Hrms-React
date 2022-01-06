@@ -77,4 +77,19 @@ export default class CvService{
         return axios.get("http://localhost:8080/api/cvs/getByIdCvExperience?id=" + id);
     }
     //CvExperience//
+
+    //CvEducation//
+    addCvEducation(values){
+        return axios.post("http://localhost:8080/api/cvs/addCvEducation", values);
+    }
+    deleteCvEducation(id){
+        return axios.delete("http://localhost:8080/api/cvs/deleteCvEducation?id=" + id);
+    }
+    updateCvEducation(values){
+        return axios.put("http://localhost:8080/api/cvs/updateCvEducation" , values);
+    }
+    getByIdCvEducation(id){
+        return axios.get("http://localhost:8080/api/cvs/getByIdCvEducation?id=" + id);
+    }
+    //CvEducation//
 }

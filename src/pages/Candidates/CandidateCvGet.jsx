@@ -41,7 +41,10 @@ export default function CandidateCvGet() {
         toast.success(`${values.workplaceName} başarı ile silinmiştir.`)
     }
 
-    
+    const onCvEducationDel = (values) => {
+        cvService.deleteCvEducation(values.id);
+        toast.success(`${values.college?.collegeName} başarı ile silinmiştir.`)
+    }
 
     return (
         <div>
@@ -137,9 +140,9 @@ export default function CandidateCvGet() {
                             <Card.Description>Mezun oldu mu ? : {cvEducation.isGraduated ? "True" : "False"}</Card.Description>
                             <Card.Description>Fakülte ismi : {cvEducation.collegeDepartment.collegeDepartmentName}</Card.Description>
                             <Card.Description>Üniversite ismi : {cvEducation.college.collegeName}</Card.Description>
-                            <Button basic color='blue'>Ekle</Button>
-                            <Button basic color='blue'>Güncelle</Button>
-                            <Button basic color='blue'>Sil</Button>
+                            <Button basic color='blue'><Link to={"/candidate/cv/" + id + "/addcveducation" }>Ekle</Link></Button>
+                            <Button basic color='blue'><Link to={"/candidate/cv/" + id + "/updcveducation/" + cvEducation.id}>Güncelle</Link></Button>
+                            <Button basic color='blue' onClick={() => onCvEducationDel(cvEducation)} >Sil</Button>
                         </Card.Content>
                     ))
                 }

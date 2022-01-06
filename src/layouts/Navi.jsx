@@ -16,6 +16,8 @@ export default function Navi() {
                     <Menu.Item as={NavLink} to="/typeofwork" name="TypeOfWork" />
                     <Menu.Item as={NavLink} to="/typeofworktime" name="TypeOfWorkTime" />
                     <Menu.Item as={NavLink} to="/cvLanguages" name="CvLanguages" />
+                    <Menu.Item as={NavLink} to="/cvCollegeDepartment" name="CvCollegeDepartment" />
+                    <Menu.Item as={NavLink} to="/cvCollege" name="cvCollege" />
                     
                     <Menu.Menu position="right">
                         <Menu.Item>
