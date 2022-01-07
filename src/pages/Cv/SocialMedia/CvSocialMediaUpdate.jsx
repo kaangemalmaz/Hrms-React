@@ -34,6 +34,7 @@ export default function CvSocialMediaUpdate() {
         }
         cvService.updateCvSocialMedia(socialMediaUpdDto);
         toast.success(`${values.socialUrl} başarı ile güncellendi`)
+        window.location.replace("/candidate/cv/" + userid);
     }
 
     return (

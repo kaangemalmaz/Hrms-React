@@ -30,6 +30,7 @@ export default function TypeOfWorkUpdate() {
     const onSubmit = (values) => {
         typeofworkService.update(values);
         toast.success(`${values.workType} başarı ile güncellendi`)
+        window.location.replace("/typeofwork");
     }
 
     return (

@@ -22,6 +22,7 @@ export default function TypeOfWorkTimeAdd() {
         console.log(values);
         typeofworktimeService.add(values);
         toast.success(`${values.workTimeType} başarı ile eklendi`)
+        window.location.replace("/typeofworktime");
     }
 
     return (

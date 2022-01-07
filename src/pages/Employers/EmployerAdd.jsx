@@ -31,6 +31,7 @@ export default function EmployerAdd() {
     const onSubmit = (values) => {
         employerService.add(values);
         toast.success(`${values.email} başarı ile eklendi`)
+        window.location.replace("/logIn");
     }
 
     return (

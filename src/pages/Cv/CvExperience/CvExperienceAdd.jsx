@@ -2,10 +2,11 @@ import { Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Button, Checkbox } from 'semantic-ui-react';
+import { Button, Checkbox, FormCheckbox } from 'semantic-ui-react';
 import * as Yup from "yup";
 import CvService from '../../../services/cvService';
 import JobService from '../../../services/jobService';
+import AKGCheckbox from '../../../utilities/CustomFormControl/AKGCheckbox';
 import AKGDropdown2 from '../../../utilities/CustomFormControl/AKGDropdown2';
 import AKGTextInput from '../../../utilities/CustomFormControl/AKGTextInput';
 
@@ -48,6 +49,7 @@ export default function CvExperienceAdd() {
         }
         cvService.addCvExperience(cvExperienceAddDto);
         toast.success(`${values.workplaceName} başarı ile eklendi`)
+        window.location.replace("/candidate/cv/" +id);
     };
 
     const JobOptions = jobs.map((job, index) => ({
@@ -68,7 +70,8 @@ export default function CvExperienceAdd() {
                     <AKGTextInput label="workplaceName" name="workplaceName" placeholder="workplaceName" />
                     <AKGTextInput label="workStartedYear" name="workStartedYear" placeholder="workStartedYear" />
                     <AKGTextInput label="workLeftYear" name="workLeftYear" placeholder="workLeftYear" />
-                    <AKGTextInput label="isWorking" name="isWorking" placeholder="isWorking" />
+                    {/* <AKGTextInput label="isWorking" name="isWorking" placeholder="isWorking" /> */}
+                    <AKGCheckbox name="isWorking" label='Çalışmaya devam ediyor mu?' />
                     <AKGDropdown2 label="Job" name="jobId" defaultOption="Seçiniz" options={JobOptions} />
                     <Button color="green" type="submit">Ekle</Button>
                 </Form>

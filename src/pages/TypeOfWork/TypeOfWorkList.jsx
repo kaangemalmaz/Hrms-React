@@ -14,8 +14,8 @@ export default function TypeOfWorkList() {
     }, [])
 
     const onSubmit = (values) => {
-        console.log(values);
         typeofworkService.delete(values.id);
+        window.location.reload();
         toast.success(`${values.workType} başarı ile silinmiştir.`)
     }
 

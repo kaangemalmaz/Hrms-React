@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import CvCollegeDepartmentService from '../../../services/cvCollegeDepartmentService';
 import CvCollegeService from '../../../services/cvcollegeService';
 import CvService from '../../../services/cvService';
+import AKGCheckbox from '../../../utilities/CustomFormControl/AKGCheckbox';
 import AKGDropdown2 from '../../../utilities/CustomFormControl/AKGDropdown2';
 import AKGTextInput from '../../../utilities/CustomFormControl/AKGTextInput';
 
@@ -72,6 +73,7 @@ export default function CvEducationUpdate() {
         }
         cvService.updateCvEducation(educationUpdDto);
         toast.success(`${cvCollege.collegeName} başarı ile güncellendi!`)
+        window.location.replace("/candidate/cv/" + userid);
     };
 
     return (
@@ -86,7 +88,8 @@ export default function CvEducationUpdate() {
                     <input type="hidden" name="id" />
                     <AKGTextInput label="collegeStartedYear" name="collegeStartedYear" placeholder="collegeStartedYear" />
                     <AKGTextInput label="collegeGraduatedYear" name="collegeGraduatedYear" placeholder="collegeGraduatedYear" />
-                    <AKGTextInput label="isGraduated" name="isGraduated" placeholder="isGraduated" />
+                    {/* <AKGTextInput label="isGraduated" name="isGraduated" placeholder="isGraduated" /> */}
+                    <AKGCheckbox name="isGraduated" label='Mezun oldu mu?' />
                     <AKGDropdown2 label="College" name="collegeId" defaultOption="Seçiniz" options={cvCollegeOptions} />
                     <AKGDropdown2 label="CollegeDepartment" name="collegeDepartmentId" defaultOption="Seçiniz" options={cvCollegeDepartmanOptions} />
                     <Button color="green" type="submit">Güncelle</Button>

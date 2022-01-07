@@ -30,6 +30,7 @@ export default function TypeOfWorkTimeUpdate() {
     const onSubmit = (values) => {
         typeofworktimeService.update(values);
         toast.success(`${values.workTimeType} başarı ile güncellendi`)
+        window.location.replace("/typeofworktime");
     }
     
     return (

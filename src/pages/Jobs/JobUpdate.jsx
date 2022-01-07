@@ -30,6 +30,7 @@ export default function JobUpdate() {
     const onSubmit = (values) => {
         jobService.update(values);
         toast.success(`${values.title} başarı ile güncellendi`)
+        window.location.replace("/jobs");
     }
 
     return (

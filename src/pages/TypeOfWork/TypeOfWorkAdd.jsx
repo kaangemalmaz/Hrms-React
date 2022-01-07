@@ -21,6 +21,7 @@ export default function TypeOfWorkAdd() {
     const onSubmit = (values) => {
         typeofworkService.add(values);
         toast.success(`${values.workType} başarı ile eklendi`)
+        window.location.replace("/typeofwork");
     }
 
     return (

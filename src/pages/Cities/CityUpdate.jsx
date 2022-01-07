@@ -30,6 +30,7 @@ export default function CityUpdate() {
     const onSubmit = (values) => {
         cityService.update(values);
         toast.success(`${values.name} başarı ile güncellendi`)
+        window.location.replace("/cities");
     }
     return (
         <div>

@@ -88,6 +88,7 @@ export default function JobPostingAdd() {
         //debugger;
         jobPostingService.add(addJobPost);
         toast.success(`${values.jobDescription} başarı ile eklendi`)
+        window.location.replace("/jobpostings");
     };
 
     const cityOptions = cities.map((city, index) => ({

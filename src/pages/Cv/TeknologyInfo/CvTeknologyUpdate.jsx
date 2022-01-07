@@ -33,6 +33,7 @@ export default function CvTeknologyUpdate() {
         }
         cvService.updateCvTeknology(teknologyUpdDto);
         toast.success(`${values.technologyName} başarı ile güncellendi`)
+        window.location.replace("/candidate/cv/" + userid);
     }
 
     return (

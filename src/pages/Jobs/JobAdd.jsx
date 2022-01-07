@@ -19,6 +19,7 @@ export default function JobAdd() {
     const onSubmit = (values) => {
         jobService.add(values);
         toast.success(`${values.title} başarı ile eklendi`)
+        window.location.replace("/jobs");
     }
 
     return (

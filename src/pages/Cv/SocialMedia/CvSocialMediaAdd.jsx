@@ -24,9 +24,9 @@ export default function CvSocialMediaAdd() {
             candidate: { id: id },
             socialUrl: values.socialUrl,
         }
-        console.log(socialMediaDto);
         cvService.addCvSocialMedia(socialMediaDto);
         toast.success(`${values.socialUrl} başarı ile eklendi`)
+        window.location.replace("/candidate/cv/" +id);
     };
 
 

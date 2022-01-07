@@ -33,6 +33,7 @@ export default function CvCoverLetterUpdate() {
         }
         cvService.updateCvCoverLetter(coverLetterUpdDto);
         toast.success(`${values.coverLetter} başarı ile güncellendi`)
+        window.location.replace("/candidate/cv/" + userid);
     }
 
     return (

@@ -29,6 +29,7 @@ export default function CvLanguageUpdate() {
     const onSubmit = (values) => {
         cvLanguageService.update(values);
         toast.success(`${values.languageName} başarı ile güncellendi.`)
+        window.location.replace("/cvLanguages");
     }
 
     return (

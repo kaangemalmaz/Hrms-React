@@ -37,6 +37,7 @@ export default function CvKnowLanguageAdd() {
         }
         cvService.addCvKnowLanguage(knowLanguageDto);
         toast.success(`${values.languageLevel} başarı ile eklendi`)
+        window.location.replace("/candidate/cv/" +id);
     };
 
     const cvLanguageOptions = cvLanguages.map((cvLanguage, index) => ({

@@ -19,6 +19,7 @@ export default function CvLanguageAdd() {
     const onSubmit = (values) => {
         cvLanguageService.add(values);
         toast.success(`${values.languageName} başarı ile eklendi`)
+        window.location.replace("/cvLanguages");
     }
 
     return (

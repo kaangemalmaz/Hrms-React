@@ -24,6 +24,7 @@ export default function CvCoverLetterAdd() {
         }
         cvService.addCvCoverLetter(coverLetterDto);
         toast.success(`${values.coverLetter} başarı ile eklendi`)
+        window.location.replace("/candidate/cv/" +id);
     };
 
 

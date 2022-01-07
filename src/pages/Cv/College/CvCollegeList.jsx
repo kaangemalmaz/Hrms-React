@@ -15,6 +15,7 @@ export default function CvCollegeList() {
 
     const onSubmit = (values) => {
         cvCollegeService.delete(values.id);
+        window.location.reload();
         toast.success(`${values.collegeName} başarı ile silinmiştir.`)
     }
 

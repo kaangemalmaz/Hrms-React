@@ -8,6 +8,7 @@ import AKGTextInput from '../../../utilities/CustomFormControl/AKGTextInput';
 import { Button } from 'semantic-ui-react';
 import AKGDropdown2 from '../../../utilities/CustomFormControl/AKGDropdown2';
 import JobService from '../../../services/jobService';
+import AKGCheckbox from '../../../utilities/CustomFormControl/AKGCheckbox';
 
 export default function CvExperienceUpdate() {
 
@@ -53,7 +54,11 @@ export default function CvExperienceUpdate() {
         }
         cvService.updateCvExperience(cvExperienceUpdDto);
         toast.success(`${values.workplaceName} başarı ile güncellendi`)
+        window.location.replace("/candidate/cv/" + userid);
+        
     }
+
+    //let checkedTrue = cvExperience.isWorking ? "checked" : "";
 
     const JobOptions = jobs.map((job, index) => ({
         key: index,
@@ -73,7 +78,8 @@ export default function CvExperienceUpdate() {
                 <AKGTextInput label="workplaceName" name="workplaceName" placeholder="workplaceName" />
                 <AKGTextInput label="workStartedYear" name="workStartedYear" placeholder="workStartedYear" />
                 <AKGTextInput label="workLeftYear" name="workLeftYear" placeholder="workLeftYear" />
-                <AKGTextInput label="isWorking" name="isWorking" placeholder="isWorking" />
+                {/* <AKGTextInput label="isWorking" name="isWorking" placeholder="isWorking" /> */}
+                <AKGCheckbox name="isWorking" label='Çalışmaya devam ediyor mu?' />
                 <AKGDropdown2 label="Job" name="jobId" defaultOption="Seçiniz" options={JobOptions} />
                 <Button color="green" type="submit">Güncelle</Button>
             </Form>

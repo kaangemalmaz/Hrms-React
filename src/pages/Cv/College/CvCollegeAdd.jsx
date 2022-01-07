@@ -19,6 +19,7 @@ export default function CvCollegeAdd() {
     const onSubmit = (values) => {
         cvCollegeService.add(values);
         toast.success(`${values.collegeName} başarı ile eklendi`)
+        window.location.replace("/cvCollege");
     }
 
     return (

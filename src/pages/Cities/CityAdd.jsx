@@ -19,6 +19,7 @@ export default function CityAdd() {
     const onSubmit = (values) => {
         cityService.add(values);
         toast.success(`${values.name} başarı ile eklendi`)
+        window.location.replace("/cities");
     }
 
     return (

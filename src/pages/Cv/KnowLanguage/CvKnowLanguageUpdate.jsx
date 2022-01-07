@@ -43,9 +43,9 @@ export default function CvKnowLanguageUpdate() {
             candidate: { id: userid },
             language: { id: values.cvLanguageId },
         }
-        console.log(knowLanguageUpdDto);
         cvService.updateCvKnowLanguage(knowLanguageUpdDto);
         toast.success(`${values.languageLevel} başarı ile eklendi`)
+        window.location.replace("/candidate/cv/" + userid);
     };
 
     const cvLanguageOptions = cvLanguages.map((cvLanguage, index) => ({

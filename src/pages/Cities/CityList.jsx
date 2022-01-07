@@ -21,6 +21,7 @@ export default function CityList() {
 
     const onSubmit = (values) => {
         cityService.delete(values.id);
+        window.location.reload();
         toast.success(`${values.name} başarı ile silinmiştir.`)
     }
 

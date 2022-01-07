@@ -33,6 +33,7 @@ export default function CandidateAdd() {
     const onSubmit = (values) => {
         candidateService.add(values);
         toast.success(`${values.email} başarı ile eklendi`)
+        window.location.replace("/logIn");
     }
 
     return (

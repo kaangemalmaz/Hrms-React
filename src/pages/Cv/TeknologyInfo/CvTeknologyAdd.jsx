@@ -22,9 +22,9 @@ export default function CvTeknologyAdd() {
             candidate: { id: id },
             technologyName: values.technologyName,
         }
-        //console.log(teknologyDto);
         cvService.addCvTeknology(teknologyDto);
         toast.success(`${values.technologyName} başarı ile eklendi`)
+        window.location.replace("/candidate/cv/" +id);
     };
 
 

@@ -15,6 +15,7 @@ export default function CvLanguageList() {
 
     const onSubmit = (values) => {
         cvLanguageService.delete(values.id);
+        window.location.reload();
         toast.success(`${values.languageName} başarı ile silinmiştir.`)
     }
 

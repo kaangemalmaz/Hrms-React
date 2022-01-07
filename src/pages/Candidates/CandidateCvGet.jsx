@@ -18,31 +18,37 @@ export default function CandidateCvGet() {
 
     const onCvSovialMediaDel = (values) => {
         cvService.deleteCvSocialMedia(values.id);
+        window.location.reload();
         toast.success(`${values.socialUrl} başarı ile silinmiştir.`)
     }
 
     const onCvTeknologyDel = (values) => {
         cvService.deleteCvTeknology(values.id);
+        window.location.reload();
         toast.success(`${values.technologyName} başarı ile silinmiştir.`)
     }
 
     const onCvCoverLetterDel = (values) => {
         cvService.deleteCvCoverLetter(values.id);
+        window.location.reload();
         toast.success(`${values.coverLetter} başarı ile silinmiştir.`)
     }
 
     const onCvKnowLanguageDel = (values) => {
         cvService.deleteCvKnowLanguage(values.id);
+        window.location.reload();
         toast.success(`${values.language.languageName} başarı ile silinmiştir.`)
     }
 
     const onCvExperinceDel = (values) => {
         cvService.deleteCvExperience(values.id);
+        window.location.reload();
         toast.success(`${values.workplaceName} başarı ile silinmiştir.`)
     }
 
     const onCvEducationDel = (values) => {
         cvService.deleteCvEducation(values.id);
+        window.location.reload();
         toast.success(`${values.college?.collegeName} başarı ile silinmiştir.`)
     }
 

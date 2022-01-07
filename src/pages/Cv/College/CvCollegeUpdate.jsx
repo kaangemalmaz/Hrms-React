@@ -28,6 +28,7 @@ export default function CvCollegeUpdate() {
     const onSubmit = (values) => {
         cvCollegeService.update(values);
         toast.success(`${values.collegeName} başarı ile güncellendi.`)
+        window.location.replace("/cvCollege");
     }
 
     return (

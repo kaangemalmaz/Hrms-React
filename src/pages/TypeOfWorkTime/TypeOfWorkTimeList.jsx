@@ -15,6 +15,7 @@ export default function TypeOfWorkTimeList() {
 
     const onSubmit = (values) => {
         typeofworktimeService.delete(values.id);
+        window.location.reload();
         toast.success(`${values.workTimeType} başarı ile silinmiştir.`)
     }
 
