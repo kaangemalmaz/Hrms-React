@@ -46,4 +46,9 @@ export default class JobPostingService {
         "&typeOfWorkTimeId=" +typeOfWorkTimeId
     );
   }
+
+  getAllActiveOnesByPage(pageNo, pageSize) {
+    return axios.get("http://localhost:8080/api/jobpostings/getAllActiveOnesByPage?pageNo=" + pageNo + "&pageSize=" + pageSize);
+  }
+  
 }
